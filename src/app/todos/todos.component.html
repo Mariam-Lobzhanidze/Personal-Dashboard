@@ -1,0 +1,9 @@
+<div class="todos">
+  @for(category of toDoCategories; track category.id) {
+
+  <app-to-do-category-tile
+    (click)="navigateToCategory(category)"
+    [selectedCategoryId]="selectedCategoryId"
+    [category]="category"></app-to-do-category-tile>
+  }
+</div>

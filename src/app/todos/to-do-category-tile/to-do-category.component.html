@@ -1,0 +1,5 @@
+<div class="category-tile" [ngClass]="{ selected: isSelected }">
+  <img [src]="'/assets/icons/' + category?.icon" alt="category-icon" />
+  <p>{{ category?.title }}</p>
+  <span> Active: {{ category?.activeTodosCount }}</span>
+</div>
