@@ -1,1 +1,8 @@
-<p>todo-list works!</p>
+<div class="add-item">
+  <app-add-new-todo></app-add-new-todo>
+</div>
+<div class="todo-list">
+  @for(todo of todos; track todo.id) {
+  <app-todo-list-item [listItem]="todo"></app-todo-list-item>
+  }
+</div>

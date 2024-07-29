@@ -1,7 +1,9 @@
 export interface Todo {
-  id: number;
+  id: string;
   description: string;
   completed: boolean;
-  categoryId: number;
-  createdAt: Date;
+  categoryId?: number;
+  categoryName: string;
+  createdAt?: Date;
+  dueDate?: Date;
 }

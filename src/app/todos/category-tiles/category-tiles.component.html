@@ -1,4 +1,4 @@
-<div class="category-tiles">
+<div class="categories-tiles">
   @for(category of categories; track category.id) {
   <app-to-do-category-tile [toDoCategory]="category" (click)="onLoadToDoListByCategory(category)">
   </app-to-do-category-tile>

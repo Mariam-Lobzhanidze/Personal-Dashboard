@@ -1,0 +1,29 @@
+.current-date {
+  text-align: center;
+  padding: 30px 0px 40px;
+  color: #ffb759;
+
+  h1 {
+    font-size: 40px;
+    font-weight: bold;
+    text-shadow: 0px 1px 7px rgba(black, 0.1);
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 30px;
+    text-shadow: 0px 1px 4px rgba(black, 0.1);
+  }
+
+  @media (max-width: 600px) {
+    padding: 15px;
+
+    h1 {
+      font-size: 28px;
+    }
+
+    h2 {
+      font-size: 18px;
+    }
+  }
+}

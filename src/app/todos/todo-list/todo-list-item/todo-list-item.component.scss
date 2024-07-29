@@ -1,0 +1,12 @@
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #f9f1e6;
+  border-radius: 8px;
+
+  &-controls {
+    display: flex;
+    column-gap: 15px;
+  }
+}
