@@ -1,33 +1,34 @@
-import { Component } from "@angular/core";
-import { ToDoCategoryTileComponent } from "./to-do-category-tile/to-do-category.component";
+import { Component, OnInit } from "@angular/core";
+import { CategoryTileComponent } from "./category-tiles/category-tile/category-tile.component";
 import { Category } from "../interfaces/category.interface";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { TodoListComponent } from "./todo-list/todo-list.component";
+import { TodoService } from "../services/todo.service";
 
 @Component({
   selector: "app-todos",
   standalone: true,
-  imports: [ToDoCategoryTileComponent, TodoListComponent],
+  imports: [CategoryTileComponent, TodoListComponent, RouterModule],
   templateUrl: "./todos.component.html",
   styleUrl: "./todos.component.scss",
 })
-export class TodosComponent {
+export class TodosComponent implements OnInit {
+  public toDoCategories: Category[] = [];
+
   public selectedCategoryId?: number;
-  public constructor(private router: Router) {}
 
-  public toDoCategories: Category[] = [
-    { id: 1, title: "Work", icon: "work.svg", activeTodosCount: 5 },
-    { id: 2, title: "Personal", icon: "person.svg", activeTodosCount: 2 },
-    { id: 3, title: "Shopping", icon: "shopping.svg", activeTodosCount: 3 },
-    { id: 4, title: "Sport", icon: "sport.svg", activeTodosCount: 3 },
-    { id: 5, title: "Family", icon: "family.svg", activeTodosCount: 3 },
-    { id: 6, title: "hobby", icon: "hobby.svg", activeTodosCount: 3 },
-  ];
+  public constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private todoService: TodoService
+  ) {}
 
-  public navigateToCategory(category: Category): void {
+  public ngOnInit(): void {
+    this.toDoCategories = this.todoService.categories;
+  }
+
+  public onNavigateToDoList(category: Category): void {
     this.selectedCategoryId = category.id;
-    this.router.navigate([], {
-      queryParams: { category: category.title },
-    });
+    this.router.navigate(["list"], { relativeTo: this.route, queryParams: { category: category.title } });
   }
 }
