@@ -5,6 +5,7 @@ import { MatInputModule } from "@angular/material/input";
 import { ActivatedRoute } from "@angular/router";
 import { Todo } from "../../../interfaces/todo.interface";
 import { TodoService } from "../../../services/todo.service";
+import { generateId } from "../../../shared/utils";
 
 @Component({
   selector: "app-add-new-todo",
@@ -28,18 +29,18 @@ export class AddNewTodoComponent implements OnInit {
       description: this.fb.control(""),
     });
 
+    this.getActiveCategory();
+  }
+
+  private getActiveCategory(): void {
     this.route.queryParams.subscribe((params) => {
       this.activeCategory = params["category"];
     });
   }
 
-  private generateId(): string {
-    return new Date().toISOString();
-  }
-
   public submit() {
     const toDoItem: Todo = {
-      id: this.generateId(),
+      id: generateId(),
       description: this.form.value.description,
       categoryName: this.activeCategory,
       completed: false,
@@ -48,8 +49,5 @@ export class AddNewTodoComponent implements OnInit {
     };
 
     this.toDoService.addNewToDoItem(toDoItem);
-
-    console.log(this.toDoService.toDoList);
-    this.toDoService.filteredTodoListsSubject.next(this.toDoService.toDoList);
   }
 }

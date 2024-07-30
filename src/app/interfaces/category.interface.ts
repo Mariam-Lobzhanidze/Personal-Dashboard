@@ -1,6 +1,6 @@
 export interface Category {
-  id: number;
+  id: string;
   title: string;
-  icon: string;
+  icon?: string;
   activeTodosCount: number;
 }

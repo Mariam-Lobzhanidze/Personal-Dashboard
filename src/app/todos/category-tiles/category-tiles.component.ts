@@ -1,28 +1,53 @@
-import { Component } from "@angular/core";
+import { Component, TemplateRef, ViewChild } from "@angular/core";
 import { Category } from "../../interfaces/category.interface";
 import { TodoService } from "../../services/todo.service";
 import { CommonModule } from "@angular/common";
 import { CategoryTileComponent } from "./category-tile/category-tile.component";
 import { ActivatedRoute, Router } from "@angular/router";
+import { MatDialog, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { FormsModule } from "@angular/forms";
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
+import { generateId } from "../../shared/utils";
+import { takeUntil } from "rxjs";
+import { UnsubscribeComponent } from "../../shared/unsubscribeComponent";
 
 @Component({
   selector: "app-category-tiles",
   standalone: true,
-  imports: [CategoryTileComponent, CommonModule],
+  imports: [
+    CategoryTileComponent,
+    CommonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
   templateUrl: "./category-tiles.component.html",
   styleUrl: "./category-tiles.component.scss",
 })
-export class CategoryTilesComponent {
+export class CategoryTilesComponent extends UnsubscribeComponent {
+  @ViewChild("addNewCategoryDialogContent") addNewCategoryDialogContent!: TemplateRef<any>;
+  public dialogRef!: MatDialogRef<any>;
+
+  public newCategory?: string;
   public categories?: Category[];
 
   public constructor(
     private todoService: TodoService,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private dialog: MatDialog
+  ) {
+    super();
+  }
 
   public ngOnInit(): void {
-    this.categories = this.todoService.categories;
+    this.todoService.categories$.pipe(takeUntil(this.destroy$)).subscribe((categories) => {
+      this.categories = categories;
+    });
   }
 
   public onLoadToDoListByCategory(activeCategory: Category): void {
@@ -30,5 +55,26 @@ export class CategoryTilesComponent {
       relativeTo: this.route,
       queryParams: { category: activeCategory.title },
     });
+  }
+
+  public onOpenCategoryAddDialog(): void {
+    this.dialogRef = this.dialog.open(this.addNewCategoryDialogContent, {
+      height: "300px",
+      width: "300px",
+    });
+  }
+
+  public onAddCategory(value: { newCategory: string }): void {
+    const userCategory = {
+      id: generateId(),
+      title: value.newCategory,
+      activeTodosCount: 0,
+    };
+    if (value.newCategory !== "") {
+      this.todoService.addUserCategory(userCategory);
+    }
+
+    this.newCategory = "";
+    this.dialogRef.close();
   }
 }
