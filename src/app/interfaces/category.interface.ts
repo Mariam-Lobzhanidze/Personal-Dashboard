@@ -3,4 +3,6 @@ export interface Category {
   title: string;
   icon?: string;
   activeTodosCount: number;
+  // type: string;
+  type: "user" | "default";
 }

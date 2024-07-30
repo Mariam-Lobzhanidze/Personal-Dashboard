@@ -8,11 +8,11 @@ import { Category } from "../interfaces/category.interface";
 })
 export class TodoService {
   private defaultCategories: Category[] = [
-    { id: "1", title: "all", icon: "work.svg", activeTodosCount: 5 },
-    { id: "2", title: "work", icon: "work.svg", activeTodosCount: 5 },
-    { id: "3", title: "shopping", icon: "shopping.svg", activeTodosCount: 3 },
-    { id: "4", title: "sport", icon: "sport.svg", activeTodosCount: 3 },
-    { id: "5", title: "family", icon: "family.svg", activeTodosCount: 3 },
+    { id: "1", title: "all", icon: "work.svg", activeTodosCount: 5, type: "default" },
+    { id: "2", title: "work", icon: "work.svg", activeTodosCount: 5, type: "default" },
+    { id: "3", title: "shopping", icon: "shopping.svg", activeTodosCount: 3, type: "default" },
+    { id: "4", title: "sport", icon: "sport.svg", activeTodosCount: 3, type: "default" },
+    { id: "5", title: "family", icon: "family.svg", activeTodosCount: 3, type: "default" },
   ];
 
   private userCategories: Category[] = [];
@@ -36,11 +36,11 @@ export class TodoService {
   }
 
   private updateToDos(todo: Todo): void {
-    this.toDoListSubject.next([...this.todos, todo]);
+    this.toDoListSubject.next([...this.todos]);
   }
 
   public addUserCategory(category: Category): void {
-    this.userCategories.push(category);
+    this.userCategories.unshift(category);
     this.updateCategories();
   }
 
@@ -50,6 +50,6 @@ export class TodoService {
   }
 
   private updateCategories(): void {
-    this.categoriesSubject.next([...this.defaultCategories, ...this.userCategories]);
+    this.categoriesSubject.next([...this.userCategories, ...this.defaultCategories]);
   }
 }

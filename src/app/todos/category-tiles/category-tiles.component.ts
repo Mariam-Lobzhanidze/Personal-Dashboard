@@ -65,10 +65,11 @@ export class CategoryTilesComponent extends UnsubscribeComponent {
   }
 
   public onAddCategory(value: { newCategory: string }): void {
-    const userCategory = {
+    const userCategory: Category = {
       id: generateId(),
       title: value.newCategory,
       activeTodosCount: 0,
+      type: "user",
     };
     if (value.newCategory !== "") {
       this.todoService.addUserCategory(userCategory);
