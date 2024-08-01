@@ -1,8 +1,9 @@
-.add-item {
-  background-color: red;
-}
 .todo-list {
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+}
+
+.custom-add-button {
+  cursor: pointer;
 }

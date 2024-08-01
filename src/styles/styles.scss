@@ -1,5 +1,4 @@
 // Custom Theming for Angular Material
-
 @use "@angular/material" as mat;
 @include mat.core();
 
@@ -7,7 +6,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 
-$custom-primary-palette: (
+$custom-secondary-palette: (
   50: #f0fae7,
   100: #d8f1c2,
   200: #bee79b,
@@ -29,7 +28,7 @@ $custom-primary-palette: (
   ),
 );
 
-$custom-secondary-palette: (
+$custom-primary-palette: (
   50: #fff3e2,
   100: #ffe0b6,
   200: #ffcc87,
@@ -76,7 +75,7 @@ $personal_dashboard-theme: mat.define-light-theme(
 // that you are using.
 @include mat.all-component-themes($personal_dashboard-theme);
 
-/* You can add global styles to this file, and also import other style files */
+@import "./material.scss";
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 
 * {
@@ -88,12 +87,32 @@ $personal_dashboard-theme: mat.define-light-theme(
 html,
 body {
   height: 100%;
-}
-
-body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 a {
   text-decoration: none;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  height: 100%;
+
+  &-title {
+    // color: $primary-color;
+    color: #335f0d;
+    font-weight: 600;
+  }
+
+  &-inputs {
+    flex: 1;
+  }
+
+  &-actions {
+    justify-self: flex-end;
+    display: flex;
+    column-gap: 15px;
+  }
 }

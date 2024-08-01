@@ -1,3 +1,5 @@
+@import "variables";
+
 .categories-tiles {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -22,7 +24,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     border-radius: 8px;
-    border-bottom: 2px solid #ffb759;
+    border-bottom: 2px solid $primary-color;
 
     svg {
       width: 60px;
@@ -31,6 +33,7 @@
 
     @media (max-width: 600px) {
       padding: 10px 15px;
+      border: none;
 
       svg {
         width: 30px;
@@ -41,13 +44,5 @@
 
   .add-custom-category:hover {
     transform: scale(0.98);
-  }
-}
-
-.add-category-form {
-  padding: 20px;
-  width: 100%;
-  .mat-form-field {
-    width: 100%;
   }
 }

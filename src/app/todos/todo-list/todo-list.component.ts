@@ -6,6 +6,7 @@ import { Todo } from "../../interfaces/todo.interface";
 import { filter, map, Observable, takeUntil } from "rxjs";
 import { AddNewTodoComponent } from "./add-new-todo/add-new-todo.component";
 import { UnsubscribeComponent } from "../../shared/unsubscribeComponent";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: "app-todo-list",
@@ -15,11 +16,16 @@ import { UnsubscribeComponent } from "../../shared/unsubscribeComponent";
   styleUrl: "./todo-list.component.scss",
 })
 export class TodoListComponent extends UnsubscribeComponent implements OnInit {
+  public dialogRef!: MatDialogRef<any>;
   public activeCategory?: string | null | undefined;
 
   public todos?: Todo[];
 
-  public constructor(private route: ActivatedRoute, private todoService: TodoService) {
+  public constructor(
+    private route: ActivatedRoute,
+    private todoService: TodoService,
+    private dialog: MatDialog
+  ) {
     super();
   }
 
@@ -42,6 +48,21 @@ export class TodoListComponent extends UnsubscribeComponent implements OnInit {
   private getActiveToDoCategory(): void {
     this.route.queryParamMap.subscribe((paramMap) => {
       this.activeCategory = paramMap.get("category");
+    });
+  }
+
+  public onOpenAddToDoDialog(): void {
+    this.dialogRef = this.dialog.open(AddNewTodoComponent, {
+      height: "360px",
+      width: "300px",
+      panelClass: "my-dialog",
+    });
+
+    this.dialogRef.afterClosed().subscribe((toDoData) => {
+      if (toDoData) {
+        console.log("Form data:", toDoData);
+        this.todoService.addNewToDoItem(toDoData);
+      }
     });
   }
 }

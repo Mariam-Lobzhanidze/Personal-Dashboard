@@ -1,0 +1,20 @@
+@import "variables";
+
+.my-dialog {
+  mat-dialog-container {
+    border-radius: 8px;
+
+    .mat-mdc-dialog-surface {
+      padding: 20px;
+      border-radius: 8px;
+    }
+  }
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+.mdc-button {
+  width: 100%;
+}

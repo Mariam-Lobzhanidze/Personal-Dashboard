@@ -59,8 +59,9 @@ export class CategoryTilesComponent extends UnsubscribeComponent {
 
   public onOpenCategoryAddDialog(): void {
     this.dialogRef = this.dialog.open(this.addNewCategoryDialogContent, {
-      height: "300px",
+      height: "260px",
       width: "300px",
+      panelClass: "my-dialog",
     });
   }
 
@@ -71,7 +72,11 @@ export class CategoryTilesComponent extends UnsubscribeComponent {
       activeTodosCount: 0,
       type: "user",
     };
-    if (value.newCategory !== "") {
+
+    if (!value.newCategory) {
+      this.dialogRef.close();
+      return;
+    } else {
       this.todoService.addUserCategory(userCategory);
     }
 

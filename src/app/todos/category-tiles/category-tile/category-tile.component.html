@@ -1,9 +1,4 @@
-<div
-  class="category-tile"
-  [ngClass]="{
-    'default-category': toDoCategory?.type === 'default',
-    'user-category': toDoCategory?.type === 'user'
-  }">
+<div class="category-tile">
   <!-- <img [src]="'/assets/icons/' + toDoCategory?.icon" alt="category-icon" /> -->
   <img
     [src]="'/assets/icons/' + (toDoCategory?.icon ? toDoCategory?.icon : 'default-icon.svg')"

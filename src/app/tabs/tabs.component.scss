@@ -1,3 +1,5 @@
+@import "variables";
+
 .tabs {
   display: flex;
   column-gap: 15px;
@@ -15,7 +17,7 @@
       width: 45px;
       height: 45px;
       border-radius: 8px;
-      background-color: #ffb759;
+      background-color: $primary-color;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -32,16 +34,16 @@
 
   .tab:not(.selected):hover .tab-tile {
     background-color: transparent;
-    border: 1px solid #65bd19;
+    border: 1px solid $secondary-color;
   }
 
   .tab:not(.selected):hover .tab-tile .material-symbols-outlined {
-    color: #65bd19;
+    color: $secondary-color;
   }
 
   .tab.selected .tab-tile {
     transform: translate(0px, -100%);
-    background-color: #65bd19;
+    background-color: $secondary-color;
   }
 
   .tab::after {
@@ -56,7 +58,7 @@
   }
 
   .tab.selected:after {
-    background-color: #65bd19;
+    background-color: $secondary-color;
     width: 100%;
   }
 }
