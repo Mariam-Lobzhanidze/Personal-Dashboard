@@ -12,4 +12,5 @@ import { CommonModule } from "@angular/common";
 })
 export class CategoryTileComponent {
   @Input() toDoCategory?: Category;
+  // @Input() activeToDoCount?: number;
 }

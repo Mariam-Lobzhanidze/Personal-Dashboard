@@ -18,6 +18,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
   styleUrl: "./add-new-todo.component.scss",
 })
 export class AddNewTodoComponent implements OnInit {
+  readonly minDate = new Date();
   private activeCategory!: string;
   public form!: FormGroup;
 
@@ -50,7 +51,7 @@ export class AddNewTodoComponent implements OnInit {
       categoryName: this.activeCategory,
       completed: false,
       createdAt: new Date(),
-      dueDate: new Date(),
+      dueDate: this.form.value.dueDate,
     };
 
     if (this.form.valid) {

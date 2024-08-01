@@ -8,11 +8,11 @@ import { Category } from "../interfaces/category.interface";
 })
 export class TodoService {
   private defaultCategories: Category[] = [
-    { id: "1", title: "all", icon: "work.svg", activeTodosCount: 5, type: "default" },
-    { id: "2", title: "work", icon: "work.svg", activeTodosCount: 5, type: "default" },
-    { id: "3", title: "shopping", icon: "shopping.svg", activeTodosCount: 3, type: "default" },
-    { id: "4", title: "sport", icon: "sport.svg", activeTodosCount: 3, type: "default" },
-    { id: "5", title: "family", icon: "family.svg", activeTodosCount: 3, type: "default" },
+    { id: "1", title: "all", icon: "work.svg", activeTodosCount: 0, type: "default" },
+    { id: "2", title: "work", icon: "work.svg", activeTodosCount: 0, type: "default" },
+    { id: "3", title: "shopping", icon: "shopping.svg", activeTodosCount: 0, type: "default" },
+    { id: "4", title: "sport", icon: "sport.svg", activeTodosCount: 0, type: "default" },
+    { id: "5", title: "family", icon: "family.svg", activeTodosCount: 0, type: "default" },
   ];
 
   private userCategories: Category[] = [];

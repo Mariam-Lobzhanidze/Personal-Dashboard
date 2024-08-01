@@ -12,6 +12,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { generateId } from "../../shared/utils";
 import { takeUntil } from "rxjs";
 import { UnsubscribeComponent } from "../../shared/unsubscribeComponent";
+import { Todo } from "../../interfaces/todo.interface";
 
 @Component({
   selector: "app-category-tiles",
@@ -34,6 +35,7 @@ export class CategoryTilesComponent extends UnsubscribeComponent {
 
   public newCategory?: string;
   public categories?: Category[];
+  private allTodos?: Todo[];
 
   public constructor(
     private todoService: TodoService,
@@ -47,6 +49,25 @@ export class CategoryTilesComponent extends UnsubscribeComponent {
   public ngOnInit(): void {
     this.todoService.categories$.pipe(takeUntil(this.destroy$)).subscribe((categories) => {
       this.categories = categories;
+    });
+
+    this.todoService.toDoList$.pipe(takeUntil(this.destroy$)).subscribe((allTodos) => {
+      console.log(allTodos);
+      this.allTodos = allTodos;
+      this.updateActiveTodosCount();
+    });
+  }
+
+  private updateActiveTodosCount(): void {
+    if (!this.categories || !this.allTodos) {
+      return;
+    }
+
+    this.categories.forEach((category) => {
+      const activeTodos = this.allTodos?.filter(
+        (todo) => todo.categoryName === category.title && !todo.completed
+      );
+      category.activeTodosCount = activeTodos?.length ?? 0;
     });
   }
 
