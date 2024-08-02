@@ -116,3 +116,9 @@ a {
     column-gap: 15px;
   }
 }
+
+.text-icon-aligned {
+  display: flex;
+  column-gap: 6px;
+  align-items: center;
+}

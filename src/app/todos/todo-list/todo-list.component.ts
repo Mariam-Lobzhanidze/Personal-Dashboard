@@ -7,11 +7,12 @@ import { filter, map, Observable, takeUntil, tap } from "rxjs";
 import { AddNewTodoComponent } from "./add-new-todo/add-new-todo.component";
 import { UnsubscribeComponent } from "../../shared/unsubscribeComponent";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { SideNavComponent } from "../../shared/side-nav/side-nav.component";
 
 @Component({
   selector: "app-todo-list",
   standalone: true,
-  imports: [TodoListItemComponent, AddNewTodoComponent],
+  imports: [TodoListItemComponent, AddNewTodoComponent, SideNavComponent],
   templateUrl: "./todo-list.component.html",
   styleUrl: "./todo-list.component.scss",
 })

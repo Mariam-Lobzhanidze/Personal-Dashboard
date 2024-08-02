@@ -1,9 +1,79 @@
+@import "variables";
+
 .todo-list {
   display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-}
+  column-gap: 10px;
+  height: 100%;
 
-.custom-add-button {
-  cursor: pointer;
+  &-side-nav {
+    position: relative;
+    width: 200px;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &-content {
+    border-radius: 8px;
+    background-color: $background-color;
+    flex: 1;
+    padding: 15px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+
+    .welcome-message {
+      text-align: center;
+      background-color: $secondary-color-light;
+      padding: 15px;
+      border-radius: 8px;
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      column-gap: 15px;
+      align-items: center;
+
+      p {
+        font-size: 14px;
+        // color: $primary-color;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -12px;
+        left: 10px;
+        width: 0;
+        height: 0;
+        border-left: 16px solid transparent;
+        border-right: 16px solid transparent;
+        border-top: 16px solid $secondary-color-light;
+      }
+    }
+
+    .add-button {
+      cursor: pointer;
+      position: absolute;
+      top: 30px;
+      left: 30px;
+
+      @media (max-width: 600px) {
+        bottom: 180px;
+        right: 40px;
+      }
+    }
+
+    .list-items {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 25px;
+      height: 90%;
+      overflow-y: auto;
+      flex: 1;
+    }
+  }
 }

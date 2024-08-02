@@ -31,7 +31,7 @@ export class TodoService {
   public constructor() {}
 
   public addNewToDoItem(item: Todo): void {
-    this.todos.push(item);
+    this.todos.unshift(item);
     this.updateToDos(item);
   }
 

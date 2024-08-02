@@ -1,14 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { CategoryTileComponent } from "./category-tiles/category-tile/category-tile.component";
-import { Category } from "../interfaces/category.interface";
-import { ActivatedRoute, Router, RouterModule } from "@angular/router";
+import { Component } from "@angular/core";
+import { RouterModule } from "@angular/router";
 import { TodoListComponent } from "./todo-list/todo-list.component";
-import { TodoService } from "../services/todo.service";
+import { CategoryTilesComponent } from "./category-tiles/category-tiles.component";
 
 @Component({
   selector: "app-todos",
   standalone: true,
-  imports: [CategoryTileComponent, TodoListComponent, RouterModule],
+  imports: [CategoryTilesComponent, TodoListComponent, RouterModule],
   templateUrl: "./todos.component.html",
   styleUrl: "./todos.component.scss",
 })

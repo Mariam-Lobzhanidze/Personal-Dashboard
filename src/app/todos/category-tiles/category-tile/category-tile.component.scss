@@ -11,7 +11,7 @@
 .category-tile {
   @include flex-column(30px);
 
-  background-color: #202020;
+  background-color: $background-color;
   padding: 15px;
   box-shadow: 0px 2px 9px rgba(black, 0.4);
   cursor: pointer;
