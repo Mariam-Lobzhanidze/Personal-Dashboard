@@ -1,32 +1,33 @@
-<div class="list-item">
+<div class="list-item" [ngClass]="{ completed: listItem?.completed }">
+  <div class="list-item-dots">
+    <img src="/assets/icons/dots-vertical.svg" alt="edit-icon" />
+  </div>
   <div class="list-item-top">
     <div class="list-item-top-task">
-      <!-- <mat-checkbox class="list-item-checkbox" [(ngModel)]="checked"></mat-checkbox> -->
-      <p class="">{{ listItem?.description }}</p>
-    </div>
-
-    <div class="list-item-top-menu">
-      <img src="/assets/icons/dots-vertical.svg" alt="edit-icon" />
+      <p [ngClass]="{ completed: listItem?.completed }">{{ listItem?.description }}</p>
     </div>
   </div>
   <div class="list-item-controls">
     @if(!listItem?.completed) {
-
-    <button class="complete-btn" color="primary" mat-stroked-button>Complete</button>
+    <div class="activation-time text-icon-aligned">
+      <img src="/assets/icons/fire.svg" alt="fire-icon" />
+      <p class="primary-colored">Today</p>
+    </div>
+    <button
+      (click)="onDetermineCompletionState(listItem?.id, true)"
+      class="complete-btn"
+      color="primary"
+      mat-stroked-button
+      >Complete</button
+    >
     } @else {
-    <div class="list-item-bottom">
+    <div class="list-item-bottom-completed">
       <div class="text-icon-aligned">
         <img src="/assets/icons/check.svg" alt="check" />
-        <p class="">Completed</p>
+        <p class="secondary-light-colored">Completed</p>
       </div>
-      <button [color]="!listItem?.completed ? 'primary' : 'accent'" mat-stroked-button>Undo</button>
+      <button (click)="onDetermineCompletionState(listItem?.id, false)" mat-button>Undo</button>
     </div>
-
     }
   </div>
-
-  <!-- <div class="list-item-controls">
-    <button mat-raised-button color="accent" mat-button>Edit</button>
-    <button mat-raised-button color="warn" mat-button>Delete</button>
-  </div> -->
 </div>

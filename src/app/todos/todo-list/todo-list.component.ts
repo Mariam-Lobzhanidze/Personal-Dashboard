@@ -46,6 +46,8 @@ export class TodoListComponent extends UnsubscribeComponent implements OnInit {
       });
   }
 
+  private updateToDoListItemCompletedState() {}
+
   private getActiveToDoCategory(): void {
     this.route.queryParamMap.subscribe((paramMap) => {
       this.activeCategory = paramMap.get("category");

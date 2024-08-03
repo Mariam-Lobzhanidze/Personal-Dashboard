@@ -7,7 +7,7 @@
 
   &-side-nav {
     position: relative;
-    width: 200px;
+    width: 300px;
 
     @media (max-width: 768px) {
       display: none;
@@ -38,7 +38,6 @@
 
       p {
         font-size: 14px;
-        // color: $primary-color;
       }
 
       &::after {
@@ -61,12 +60,25 @@
       left: 30px;
 
       @media (max-width: 600px) {
-        bottom: 180px;
-        right: 40px;
+        left: auto;
+        right: 30px;
+      }
+    }
+
+    .mobile-menu {
+      display: none;
+      cursor: pointer;
+
+      @media (max-width: 600px) {
+        display: block;
+        position: absolute;
+        top: 30px;
+        left: 30px;
       }
     }
 
     .list-items {
+      margin-top: 100px;
       padding: 15px;
       display: flex;
       flex-direction: column;
