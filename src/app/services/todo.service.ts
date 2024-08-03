@@ -32,11 +32,19 @@ export class TodoService {
 
   public addNewToDoItem(item: Todo): void {
     this.todos.unshift(item);
-    this.updateToDos(item);
+    this.updateToDos();
   }
 
-  private updateToDos(todo: Todo): void {
+  private updateToDos(): void {
     this.toDoListSubject.next([...this.todos]);
+  }
+
+  public updateToDoCompletionState(id: string | undefined, completed: boolean) {
+    const toDoForUpdate = this.todos.find((todo) => todo.id === id);
+    if (toDoForUpdate) {
+      toDoForUpdate.completed = completed;
+      this.updateToDos();
+    }
   }
 
   public addUserCategory(category: Category): void {
