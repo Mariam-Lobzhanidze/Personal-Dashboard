@@ -26,7 +26,7 @@
 
     .welcome-message {
       text-align: center;
-      background-color: $secondary-color-light;
+      background-color: $secondary-color-tint-500;
       padding: 15px;
       border-radius: 8px;
       position: relative;
@@ -49,7 +49,7 @@
         height: 0;
         border-left: 16px solid transparent;
         border-right: 16px solid transparent;
-        border-top: 16px solid $secondary-color-light;
+        border-top: 16px solid $secondary-color-tint-500;
       }
     }
 

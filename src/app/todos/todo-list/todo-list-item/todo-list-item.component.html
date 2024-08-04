@@ -1,6 +1,6 @@
 <div class="list-item" [ngClass]="{ completed: listItem?.completed }">
   <div class="list-item-dots">
-    <img src="/assets/icons/dots-vertical.svg" alt="edit-icon" />
+    <app-edit-menu [items]="menuItems"> </app-edit-menu>
   </div>
   <div class="list-item-top">
     <div class="list-item-top-task">

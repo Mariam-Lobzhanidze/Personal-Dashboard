@@ -32,7 +32,8 @@
   &.completed {
     background-color: transparent;
     &::before {
-      background-color: $list-item-completed-background-color;
+      // background-color: $list-item-completed-background-color;
+      background-color: $secondary-color-tint-500;
     }
   }
 
@@ -49,7 +50,7 @@
 
       p.completed {
         text-decoration: line-through;
-        color: $secondary-color-light;
+        color: $secondary-color-tint-500;
       }
     }
   }

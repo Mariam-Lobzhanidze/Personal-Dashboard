@@ -29,16 +29,25 @@ mat-sidenav {
   background-color: $background-color;
   border-radius: 8px;
 
-  // @media screen and (min-width: 600px) {
-  //   padding-top: 4rem;
-  // }
-
   .entry {
     display: flex;
     align-items: center;
     column-gap: 10px;
     padding: 10px;
-    // color: $primary-color;
-    color: $secondary-color-light;
+    color: $secondary-color-tint-500;
+  }
+}
+
+.mat-mdc-menu-panel {
+  min-width: 90px !important;
+  background-color: $secondary-color-tint-100 !important;
+  .mat-mdc-menu-content {
+    padding: 0 !important;
+    .mat-mdc-menu-item {
+      padding: 0px 8px !important;
+      &:hover {
+        background-color: $primary-color-tint-600 !important;
+      }
+    }
   }
 }

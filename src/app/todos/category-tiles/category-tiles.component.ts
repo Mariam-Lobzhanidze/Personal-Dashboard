@@ -52,7 +52,6 @@ export class CategoryTilesComponent extends UnsubscribeComponent {
     });
 
     this.todoService.toDoList$.pipe(takeUntil(this.destroy$)).subscribe((allTodos) => {
-      console.log(allTodos);
       this.allTodos = allTodos;
       this.updateActiveTodosCount();
     });
@@ -67,7 +66,8 @@ export class CategoryTilesComponent extends UnsubscribeComponent {
       const activeTodos = this.allTodos?.filter(
         (todo) => todo.categoryName === category.title && !todo.completed
       );
-      category.activeTodosCount = activeTodos?.length ?? 0;
+      category.activeTodosCount =
+        category.title !== "all" ? activeTodos?.length ?? 0 : this.allTodos?.length ?? 0;
     });
   }
 

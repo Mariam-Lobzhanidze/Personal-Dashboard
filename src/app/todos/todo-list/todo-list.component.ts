@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { TodoListItemComponent } from "./todo-list-item/todo-list-item.component";
 import { TodoService } from "../../services/todo.service";
 import { Todo } from "../../interfaces/todo.interface";
-import { filter, map, Observable, takeUntil, tap } from "rxjs";
+import { map, takeUntil } from "rxjs";
 import { AddNewTodoComponent } from "./add-new-todo/add-new-todo.component";
 import { UnsubscribeComponent } from "../../shared/unsubscribeComponent";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
@@ -39,14 +39,17 @@ export class TodoListComponent extends UnsubscribeComponent implements OnInit {
     this.todoService.toDoList$
       .pipe(
         takeUntil(this.destroy$),
-        map((todos) => todos.filter((todo) => todo.categoryName === this.activeCategory))
+        map((todos) =>
+          this.activeCategory === "all"
+            ? todos
+            : todos.filter((todo) => todo.categoryName === this.activeCategory)
+        )
       )
-      .subscribe((filteredToDos) => {
-        this.todos = filteredToDos;
+      .subscribe((toDos) => {
+        this.todos = toDos;
+        console.log(this.todos);
       });
   }
-
-  private updateToDoListItemCompletedState() {}
 
   private getActiveToDoCategory(): void {
     this.route.queryParamMap.subscribe((paramMap) => {

@@ -1,0 +1,10 @@
+<img [matMenuTriggerFor]="menu" src="/assets/icons/dots-vertical.svg" alt="edit-icon" />
+<!-- <ng-content></ng-content> -->
+<mat-menu #menu="matMenu" xPosition="before" yPosition="below">
+  @for(item of items; track item.title) {
+  <button mat-menu-item>
+    <mat-icon>{{ item.icon }}</mat-icon>
+    <span>{{ item.title }}</span>
+  </button>
+  }
+</mat-menu>

@@ -1,9 +1,57 @@
 $primary-color: #ffb759;
-$primary-color-darker: #e6a550;
-$primary-color-lighter: #ffc57a;
-
 $secondary-color: #65bd19;
-$secondary-color-light: #c1e5a3;
+
+// primary-color tints
+
+$primary-color-tint-800: #ffbe6a;
+$primary-color-tint-700: #ffc57a;
+$primary-color-tint-600: #ffcd8b;
+$primary-color-tint-500: #ffd49b;
+$primary-color-tint-400: #ffdbac;
+$primary-color-tint-300: #ffe2bd;
+$primary-color-tint-200: #ffe9cd;
+$primary-color-tint-100: #fff1de;
+$primary-color-tint-50: #fff8ee;
+$primary-color-tint-10: #ffffff;
+
+// primary-color shades
+$primary-color-shade-10: #e6a550;
+$primary-color-shade-50: #cc9247;
+$primary-color-shade-100: #b3803e;
+$primary-color-shade-200: #996e35;
+$primary-color-shade-300: #805c2d;
+$primary-color-shade-400: #664924;
+$primary-color-shade-500: #4c371b;
+$primary-color-shade-600: #332512;
+$primary-color-shade-700: #191209;
+$primary-color-shade-800: #000000;
+
+// secondary-color tints
+
+$secondary-color-tint-800: #74c430;
+$secondary-color-tint-700: #84ca47;
+$secondary-color-tint-600: #93d15e;
+$secondary-color-tint-500: #a3d775;
+$secondary-color-tint-400: #b2de8c;
+$secondary-color-tint-300: #c1e5a3;
+$secondary-color-tint-200: #d1ebba;
+$secondary-color-tint-100: #e0f2d1;
+$secondary-color-tint-50: #f0f8e8;
+$secondary-color-tint-10: #ffffff;
+
+// secondary-color shades
+$secondary-color-shade-10: #5baa17;
+$secondary-color-shade-50: #519714;
+$secondary-color-shade-100: #478412;
+$secondary-color-shade-200: #3d710f;
+$secondary-color-shade-300: #335f0d;
+$secondary-color-shade-400: #284c0a;
+$secondary-color-shade-500: #1e3907;
+$secondary-color-shade-600: #142605;
+$secondary-color-shade-700: #0a1302;
+$secondary-color-shade-800: #000000;
+
+//other
 
 $background-color: #202020;
 
@@ -11,17 +59,3 @@ $list-item-active-background-color: #1239414c;
 $list-item-completed-background-color: #c1e5a3;
 
 $text-color: #333;
-/*
- primary-color tint and shades
-
-  #e6a550,#cc9247,#b3803e,#996e35,#805c2d,#664924,#4c371b,#332512,#191209,#000000;
-
-  #ffbe6a, #ffc57a,#ffcd8b,#ffd49b,#ffdbac,#ffe2bd,#ffe9cd,#fff1de,#fff8ee,#ffffff;
-*/
-
-/*
-secondary-color tint and shades
-#5baa17,#519714,#478412,#3d710f,#335f0d,#284c0a,#1e3907,#142605,#0a1302,#000000;
-
-#74c430,#84ca47,#93d15e,#a3d775,#b2de8c,#c1e5a3,#d1ebba,#e0f2d1,#f0f8e8,#ffffff;
-*/
