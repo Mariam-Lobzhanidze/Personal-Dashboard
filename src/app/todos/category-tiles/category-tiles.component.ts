@@ -62,12 +62,12 @@ export class CategoryTilesComponent extends UnsubscribeComponent {
       return;
     }
 
+    const incompleteTodos = this.allTodos?.filter((todo) => !todo.completed) ?? [];
+
     this.categories.forEach((category) => {
-      const activeTodos = this.allTodos?.filter(
-        (todo) => todo.categoryName === category.title && !todo.completed
-      );
+      const activeTodosByCategory = incompleteTodos.filter((todo) => todo.categoryName === category.title);
       category.activeTodosCount =
-        category.title !== "all" ? activeTodos?.length ?? 0 : this.allTodos?.length ?? 0;
+        category.title !== "all" ? activeTodosByCategory.length : incompleteTodos.length;
     });
   }
 

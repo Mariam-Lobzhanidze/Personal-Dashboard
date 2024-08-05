@@ -1,6 +1,6 @@
 <div class="list-item" [ngClass]="{ completed: listItem?.completed }">
-  <div class="list-item-dots">
-    <app-edit-menu [items]="menuItems"> </app-edit-menu>
+  <div class="list-item-menu-trigger">
+    <app-edit-menu (menuItemClicked)="onMenuItemClicked($event)" [items]="menuItems"> </app-edit-menu>
   </div>
   <div class="list-item-top">
     <div class="list-item-top-task">

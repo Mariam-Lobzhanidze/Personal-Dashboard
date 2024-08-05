@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
@@ -6,7 +6,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Todo } from "../../../interfaces/todo.interface";
 import { TodoService } from "../../../services/todo.service";
 import { generateId } from "../../../shared/utils";
-import { MatDialogRef } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 
 @Component({
@@ -18,6 +18,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
   styleUrl: "./add-new-todo.component.scss",
 })
 export class AddNewTodoComponent implements OnInit {
+  private isEdited = false;
   readonly minDate = new Date();
   private activeCategory!: string;
   public form!: FormGroup;
@@ -25,8 +26,9 @@ export class AddNewTodoComponent implements OnInit {
   public constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private toDoService: TodoService,
-    public dialogRef: MatDialogRef<AddNewTodoComponent>
+    private todoService: TodoService,
+    public dialogRef: MatDialogRef<AddNewTodoComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { description: string; dueDate: Date; id: string }
   ) {}
 
   public ngOnInit(): void {
@@ -34,6 +36,12 @@ export class AddNewTodoComponent implements OnInit {
       description: this.fb.control("", Validators.required),
       dueDate: this.fb.control(""),
     });
+
+    this.isEdited = !!this.data;
+
+    if (this.data) {
+      this.form.patchValue(this.data);
+    }
 
     this.getActiveCategory();
   }
@@ -55,7 +63,15 @@ export class AddNewTodoComponent implements OnInit {
     };
 
     if (this.form.valid) {
-      this.dialogRef.close(toDoItem);
+      if (!this.isEdited) {
+        this.todoService.addNewToDoItem(toDoItem);
+      } else {
+        this.todoService.updateToDoItem(this.data.id, {
+          description: this.form.value.description,
+          dueDate: this.form.value.dueDate,
+        });
+      }
+      this.dialogRef.close();
     }
   }
 }

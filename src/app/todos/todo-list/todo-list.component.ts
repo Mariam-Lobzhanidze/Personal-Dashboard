@@ -6,7 +6,7 @@ import { Todo } from "../../interfaces/todo.interface";
 import { map, takeUntil } from "rxjs";
 import { AddNewTodoComponent } from "./add-new-todo/add-new-todo.component";
 import { UnsubscribeComponent } from "../../shared/unsubscribeComponent";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { MatDialog } from "@angular/material/dialog";
 import { SideNavComponent } from "../../shared/side-nav/side-nav.component";
 
 @Component({
@@ -17,7 +17,6 @@ import { SideNavComponent } from "../../shared/side-nav/side-nav.component";
   styleUrl: "./todo-list.component.scss",
 })
 export class TodoListComponent extends UnsubscribeComponent implements OnInit {
-  public dialogRef!: MatDialogRef<any>;
   public activeCategory?: string | null | undefined;
 
   public todos?: Todo[];
@@ -58,17 +57,6 @@ export class TodoListComponent extends UnsubscribeComponent implements OnInit {
   }
 
   public onOpenAddToDoDialog(): void {
-    this.dialogRef = this.dialog.open(AddNewTodoComponent, {
-      height: "360px",
-      width: "300px",
-      panelClass: "my-dialog",
-    });
-
-    this.dialogRef.afterClosed().subscribe((toDoData) => {
-      if (toDoData) {
-        console.log("Form data:", toDoData);
-        this.todoService.addNewToDoItem(toDoData);
-      }
-    });
+    this.todoService.openDialog(AddNewTodoComponent);
   }
 }
