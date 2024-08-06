@@ -31,27 +31,20 @@
   }
 
   .tab:not(.selected):hover .tab-tile {
-    // background-color: transparent;
-    // border: 1px solid $secondary-color-tint-600;
     background-color: $primary-color-shade-10;
     border: 1px solid $primary-color-shade-10;
   }
 
   .tab .tab-tile svg {
-    // fill: $text-color;
-    //
     fill: $secondary-color-tint-600;
   }
 
   .tab:not(.selected):hover .tab-tile svg {
-    // fill: $secondary-color-tint-600;
     fill: $text-color;
   }
 
   .tab.selected .tab-tile {
     transform: translate(0px, -100%);
-    // background-color: $secondary-color-tint-600;
-    //
     background-color: $primary-color-shade-10;
     border: 1px solid $primary-color-shade-10;
   }

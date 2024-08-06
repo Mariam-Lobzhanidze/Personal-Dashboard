@@ -12,6 +12,8 @@
     flex-grow: 1;
     min-height: 0;
     align-content: space-around;
+    @media (max-width: 768px) {
+    }
   }
 
   &-footer {

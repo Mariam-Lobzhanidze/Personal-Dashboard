@@ -8,7 +8,7 @@ import { TodoService } from "../../../services/todo.service";
 import { MatMenuModule } from "@angular/material/menu";
 import { EditMenuComponent } from "../../../shared/edit-menu/edit-menu.component";
 import { AddNewTodoComponent } from "../add-new-todo/add-new-todo.component";
-
+import confetti from "canvas-confetti";
 @Component({
   selector: "app-todo-list-item",
   standalone: true,
@@ -38,6 +38,30 @@ export class TodoListItemComponent {
 
   public onDetermineCompletionState(toDoItemId: string | undefined, completed: boolean): void {
     this.todoService.updateToDoItem(toDoItemId, { completed: completed });
+    if (completed) {
+      this.playSoundAndConfetti();
+    }
+  }
+
+  private playSoundAndConfetti(): void {
+    // const audio = new Audio("/assets/sounds/add-todo-sound.mp3");
+    // audio.volume = 0.02;
+    // audio.play();
+
+    confetti({
+      shapes: ["square"],
+      particleCount: 100,
+      spread: 100,
+      origin: {
+        y: 0.5,
+        x: 0.5,
+      },
+      colors: ["#ffb759", "#65bd19", "#a3d775", "#ffd49b", "#208373"],
+      gravity: 0.8,
+    });
+
+    // Clear confetti after a certain duration
+    setTimeout(() => confetti.reset(), 3000);
   }
 
   onMenuItemClicked(action: string) {

@@ -1,53 +1,65 @@
 @import "variables";
-
-.categories-tiles {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: min-content;
-  gap: 20px;
-  overflow-y: auto;
-  // background-color: red;
-  height: 90%;
+.categories {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
   padding: 10px;
 
-  @media (max-width: 1200px) {
-    grid-template-columns: repeat(2, 1fr);
+  &-title {
+    font-size: 30px;
+    color: $primary-color;
+    font-weight: 600;
+    letter-spacing: 4px;
   }
 
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
+  //
+  &-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: min-content;
+    gap: 20px;
+    overflow-y: auto;
+    height: 90%;
 
-  .add-custom-category {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $background-color;
-    padding: 15px;
-    box-shadow: 0px 2px 9px rgba(black, 0.4);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 8px;
-    border-bottom: 2px solid $primary-color;
-
-    svg {
-      width: 60px;
-      height: 60px;
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(2, 1fr);
     }
 
     @media (max-width: 600px) {
-      padding: 10px 15px;
-      border: none;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .add-custom-category {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $background-color;
+      padding: 15px;
+      box-shadow: 0px 2px 9px rgba(black, 0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 8px;
+      border-bottom: 2px solid $primary-color;
 
       svg {
-        width: 30px;
-        height: 30px;
+        width: 60px;
+        height: 60px;
+      }
+
+      @media (max-width: 600px) {
+        padding: 10px 15px;
+        border: none;
+
+        svg {
+          width: 30px;
+          height: 30px;
+        }
       }
     }
-  }
 
-  .add-custom-category:hover {
-    transform: scale(0.98);
+    .add-custom-category:hover {
+      transform: scale(0.98);
+    }
   }
 }
