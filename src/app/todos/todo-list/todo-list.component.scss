@@ -16,84 +16,39 @@
 
   &-content {
     border-radius: 8px;
-    background-color: $background-color;
     flex: 1;
-    padding: 15px;
-    position: relative;
+    padding: 0px 15px;
     display: flex;
     flex-direction: column;
     row-gap: 25px;
-    // background-color: red;
+    background-position: fixed;
+    //
+    position: relative;
 
-    // .welcome-message {
-    //   text-align: center;
-    //   background-color: $secondary-color-tint-500;
-    //   padding: 15px;
-    //   border-radius: 8px;
-    //   position: relative;
-    //   max-width: 600px;
-    //   margin: 0 auto;
-    //   display: flex;
-    //   column-gap: 15px;
-    //   align-items: center;
+    &-controls {
+      // padding: 8px 0px;
 
-    //   p {
-    //     font-size: 14px;
-    //   }
-
-    //   &::after {
-    //     content: "";
-    //     position: absolute;
-    //     bottom: -12px;
-    //     left: 10px;
-    //     width: 0;
-    //     height: 0;
-    //     border-left: 16px solid transparent;
-    //     border-right: 16px solid transparent;
-    //     border-top: 16px solid $secondary-color-tint-500;
-    //   }
-    // }
-
-    .add-button {
-      cursor: pointer;
-      position: absolute;
-      top: 30px;
-      left: 30px;
-
-      @media (max-width: 768px) {
-        //
-        // display: none;
-
-        left: auto;
-        right: 30px;
-      }
-    }
-
-    .mobile-menu {
-      display: none;
-      cursor: pointer;
-
-      @media (max-width: 768px) {
-        display: block;
-        position: absolute;
-        top: 30px;
-        left: 30px;
+      .add-button {
+        cursor: pointer;
       }
     }
 
     .list-items {
-      margin-top: 100px;
-      padding: 15px;
+      padding: 30px 15px;
       display: flex;
       flex-direction: column;
       row-gap: 25px;
-      height: 90%;
+      height: 100%;
       overflow-y: auto;
       flex: 1;
-      // background-color: yellow;
+
       @media (max-width: 768px) {
-        margin-top: 0;
+        box-shadow: inset 0px 5px 5px -5px rgba(0, 0, 0, 0.3), inset 0px -5px 5px -5px rgba(0, 0, 0, 0.3);
       }
+    }
+
+    @media (max-width: 768px) {
+      border-radius: 0px;
     }
   }
 }

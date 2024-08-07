@@ -3,12 +3,13 @@
 .tabs {
   display: flex;
   column-gap: 15px;
-  background-color: $background-color;
+  // background-color: $background-color;
+  background-color: $list-item-active-background-color;
   padding: 15px 20px;
   width: fit-content;
   margin: 0px auto;
   border-radius: 8px;
-  box-shadow: 0px 2px 9px rgba(black, 0.4);
+  box-shadow: 0px 6px 12px rgba(black, 0.6);
 
   .tab {
     position: relative;

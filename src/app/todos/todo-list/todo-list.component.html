@@ -3,21 +3,15 @@
     <app-side-nav></app-side-nav>
   </div>
   <div class="todo-list-content">
-    <!-- <div class="welcome-message">
-
-      <p>Hi there! Easily add and manage your tasks</p>
-      <img src="assets/icons/alarm.svg" />
-    </div> -->
+    <div class="todo-list-content-controls">
+      <div class="add-button" (click)="onOpenAddToDoDialog()">
+        <img src="/assets/icons/plus.svg" alt="add-icon" />
+      </div>
+    </div>
     <div class="list-items">
       @for(todo of todos; track todo.id) {
       <app-todo-list-item [listItem]="todo"></app-todo-list-item>
       }
-    </div>
-    <div class="mobile-menu">
-      <img src="/assets/icons/mobile-menu.svg" alt="menu-icon" />
-    </div>
-    <div class="add-button" (click)="onOpenAddToDoDialog()">
-      <img src="/assets/icons/plus.svg" alt="add-icon" />
     </div>
   </div>
 </div>

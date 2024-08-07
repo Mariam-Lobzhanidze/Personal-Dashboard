@@ -2,6 +2,11 @@
   max-width: 1200px;
   margin: 0 auto;
   height: 90%;
-  // overflow-y: auto;
   padding: 0px 15px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+  }
 }

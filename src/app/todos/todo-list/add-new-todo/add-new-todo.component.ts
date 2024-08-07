@@ -52,12 +52,6 @@ export class AddNewTodoComponent implements OnInit {
     });
   }
 
-  // private playSound(): void {
-  //   const audio = new Audio("/assets/sounds/add-todo-sound.mp3");
-  //   audio.volume = 0.02;
-  //   audio.play();
-  // }
-
   public submit() {
     const toDoItem: Todo = {
       id: generateId(),
@@ -79,7 +73,5 @@ export class AddNewTodoComponent implements OnInit {
       }
       this.dialogRef.close();
     }
-
-    // this.playSound();
   }
 }
