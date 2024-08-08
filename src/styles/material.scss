@@ -146,7 +146,6 @@ $personal_dashboard-theme: mat.define-light-theme(
 }
 
 mat-sidenav {
-  padding: 0;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -155,6 +154,7 @@ mat-sidenav {
   background-color: $list-item-active-background-color;
   border-radius: 8px;
   box-shadow: 0px 5px 9px rgba(black, 0.4);
+  padding: 10px 0px;
 
   .entry {
     display: flex;
@@ -191,4 +191,33 @@ mat-sidenav {
       }
     }
   }
+}
+mat-expansion-panel {
+  color: $secondary-color-tint-500 !important;
+  background-color: transparent !important;
+  font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+  .mat-expansion-panel-header {
+    box-shadow: none !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    // background-color: transparent !important;
+
+    .mat-content {
+      color: $secondary-color-tint-500 !important;
+      .mat-expansion-panel-header-title {
+        color: $secondary-color-tint-500 !important;
+        font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+
+        font-weight: 600 !important;
+      }
+      .mat-expansion-indicator {
+        color: $secondary-color-tint-500 !important;
+      }
+    }
+  }
+}
+
+.mat-expansion-panel-header-description {
+  // justify-content: space-between;
+  // align-items: center;
 }

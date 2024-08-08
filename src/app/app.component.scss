@@ -11,19 +11,12 @@
   background-position: fixed;
   background-repeat: no-repeat;
 
-  .logo {
-    width: 60px;
-    cursor: pointer;
-
-    // background-color: $list-item-active-background-color;
-  }
-
   &-content {
     flex-grow: 1;
+    // background-color: yellow;
     min-height: 0;
-    align-content: space-around;
     @media (max-width: 768px) {
-      align-content: flex-start;
+      // align-content: flex-start;
     }
   }
 

@@ -67,13 +67,15 @@ a {
   }
 
   ::-webkit-scrollbar-thumb {
-    background: $primary-color;
+    // background: $primary-color;
+    background-color: $secondary-color-tint-600;
     border-radius: 8px;
     cursor: pointer;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: $primary-color-tint-500;
+    // background: $primary-color-tint-500;
+    background: $secondary-color-tint-700;
   }
 }
 @media (max-width: 600px) {
