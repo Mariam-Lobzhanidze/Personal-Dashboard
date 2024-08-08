@@ -21,54 +21,17 @@
   </mat-nav-list>
 
   <div class="side-nav-cards">
+    @for(toDoByCategory of toDosByCategory; track toDoByCategory.categoryName) {
     <div class="category-card">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title> Work </mat-panel-title>
-          <!-- <mat-panel-description>
-            <mat-icon>account_circle</mat-icon>
-          </mat-panel-description> -->
-        </mat-expansion-panel-header>
-        <p>here we are</p>
-      </mat-expansion-panel>
+      <div class="category-card-top aligned-space-between">
+        <p class="category-card-top-title">{{ toDoByCategory.categoryName }}</p>
+        <span class="category-card-top-percent">{{ toDoByCategory.completionRate }} %</span>
+      </div>
+      <mat-progress-bar
+        color="accent"
+        mode="determinate"
+        [value]="toDoByCategory.completionRate"></mat-progress-bar>
     </div>
-
-    <div class="category-card">
-      <p>Family</p>
-      <span>Make a dinner</span>
-      <span>Make a dinner </span>
-      <span>Make a dinner</span>
-      <span>Make a dinner</span>
-    </div>
-    <div class="category-card">
-      <p>Family</p>
-      <span>Make a dinner</span>
-      <span>Make a dinner </span>
-      <span>Make a dinner</span>
-      <span>Make a dinner</span>
-    </div>
-    <div class="category-card">
-      <p>Family</p>
-      <span>Make a dinner</span>
-      <span>Make a dinner </span>
-      <span>Make a dinner</span>
-      <span>Make a dinner</span>
-    </div>
-    <div class="category-card">
-      <p>Family</p>
-      <span>Make a dinner</span>
-      <span>Make a dinner </span>
-      <span>Make a dinner</span>
-      <span>Make a dinner</span>
-    </div>
-    <div class="category-card">
-      <p>Family</p>
-      <span>Make a dinner</span>
-      <span>Make a dinner </span>
-      <span>Make a dinner</span>
-      <span>Make a dinner</span>
-    </div>
-    <!-- <img src="/assets/img/girl.svg" alt="image" /> -->
-    <!-- <img src="/assets/img/girl-2.svg" alt="image" /> -->
+    }
   </div>
 </mat-sidenav>

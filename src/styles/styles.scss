@@ -44,6 +44,11 @@ a {
   align-items: center;
 }
 
+.aligned-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .primary-colored {
   color: $primary-color;
 }

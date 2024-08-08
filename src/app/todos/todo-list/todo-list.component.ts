@@ -46,7 +46,7 @@ export class TodoListComponent extends UnsubscribeComponent implements OnInit {
       )
       .subscribe((toDos) => {
         this.todos = toDos;
-        console.log(this.todos);
+        // console.log(this.todos);
       });
   }
 
