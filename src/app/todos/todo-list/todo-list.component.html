@@ -7,6 +7,21 @@
       <div class="add-button" (click)="onOpenAddToDoDialog()">
         <img src="/assets/icons/plus.svg" alt="add-icon" />
       </div>
+      <!-- <div class="chips-container">
+
+      </div> -->
+
+      <div class="chips">
+        <mat-chip-listbox aria-label="Categories Selection">
+          @for (category of categories$ | async; track category.id) {
+          <mat-chip-option
+            [selected]="category.title === activeCategory"
+            (click)="onCategorySelect(category.title)">
+            {{ category.title }}
+          </mat-chip-option>
+          }
+        </mat-chip-listbox>
+      </div>
     </div>
     <div class="list-items">
       @for(todo of todos; track todo.id) {

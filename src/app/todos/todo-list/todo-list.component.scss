@@ -21,13 +21,27 @@
     padding: 0px 15px;
     display: flex;
     flex-direction: column;
-    row-gap: 25px;
+    row-gap: 30px;
     background-position: fixed;
     //
     position: relative;
 
     &-controls {
-      // padding: 8px 0px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 25px;
+
+      .chips {
+        position: static;
+        @media (max-width: 600px) {
+          position: absolute;
+          top: 50px;
+          left: 0;
+          right: 0px;
+          overflow-x: auto;
+          padding: 0px 0px 0px 20px;
+        }
+      }
 
       .add-button {
         cursor: pointer;

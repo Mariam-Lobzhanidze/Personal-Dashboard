@@ -19,19 +19,21 @@
       </span>
     </a>
   </mat-nav-list>
-
-  <div class="side-nav-cards">
-    @for(toDoByCategory of toDosByCategory; track toDoByCategory.categoryName) {
-    <div class="category-card">
-      <div class="category-card-top aligned-space-between">
-        <p class="category-card-top-title">{{ toDoByCategory.categoryName }}</p>
-        <span class="category-card-top-percent">{{ toDoByCategory.completionRate }} %</span>
+  <div class="completion-cards">
+    <!-- <span class="completion-cards-title">Completion Rate</span> -->
+    <div class="completion-cards-list">
+      @for(toDoByCategory of toDosByCategory; track toDoByCategory?.categoryName) {
+      <div class="category-card">
+        <div class="category-card-top aligned-space-between">
+          <p class="category-card-top-title">{{ toDoByCategory?.categoryName }}</p>
+          <span class="category-card-top-percent">{{ toDoByCategory.completionRate }} %</span>
+        </div>
+        <mat-progress-bar
+          color="accent"
+          mode="determinate"
+          [value]="toDoByCategory?.completionRate"></mat-progress-bar>
       </div>
-      <mat-progress-bar
-        color="accent"
-        mode="determinate"
-        [value]="toDoByCategory.completionRate"></mat-progress-bar>
+      }
     </div>
-    }
   </div>
 </mat-sidenav>
