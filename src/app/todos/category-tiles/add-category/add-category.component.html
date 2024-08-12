@@ -1,0 +1,13 @@
+<form #categoryForm="ngForm" class="form" (ngSubmit)="onAddCategory(categoryForm.value)">
+  <p class="form-title"> Add New Category </p>
+  <div class="form-inputs">
+    <mat-form-field>
+      <input name="newCategory" matInput [(ngModel)]="newCategory" placeholder="E.g hobby" required />
+      <mat-error><span class="error-message">* This field is required</span></mat-error>
+    </mat-form-field>
+  </div>
+  <div class="form-actions">
+    <button mat-stroked-button type="button" (click)="dialogRef.close()">Cancel</button>
+    <button color="primary" mat-stroked-button type="submit">Save</button>
+  </div>
+</form>

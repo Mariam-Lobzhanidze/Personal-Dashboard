@@ -71,8 +71,8 @@ export class AddNewTodoComponent implements OnInit {
         toDoItem.dueDate,
         `Reminder: ${description}`,
         "assets/sounds/reminder.wav",
-        23,
-        7
+        11,
+        5
       );
     }
 

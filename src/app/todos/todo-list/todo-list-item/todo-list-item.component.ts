@@ -44,10 +44,6 @@ export class TodoListItemComponent {
   }
 
   private playSoundAndConfetti(): void {
-    // const audio = new Audio("/assets/sounds/add-todo-sound.mp3");
-    // audio.volume = 0.02;
-    // audio.play();
-
     confetti({
       shapes: ["square"],
       particleCount: 100,

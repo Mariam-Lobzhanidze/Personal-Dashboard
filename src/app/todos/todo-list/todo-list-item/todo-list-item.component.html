@@ -1,5 +1,5 @@
 <div class="list-item" [ngClass]="{ completed: listItem?.completed }">
-  <div class="list-item-menu-trigger">
+  <div class="list-item-menu-wrapper">
     <app-edit-menu (menuItemClicked)="onMenuItemClicked($event)" [items]="menuItems"> </app-edit-menu>
   </div>
   <div class="list-item-top">

@@ -13,6 +13,7 @@ import { generateId } from "../../shared/utils";
 import { takeUntil } from "rxjs";
 import { UnsubscribeComponent } from "../../shared/unsubscribeComponent";
 import { Todo } from "../../interfaces/todo.interface";
+import { AddCategoryComponent } from "./add-category/add-category.component";
 
 @Component({
   selector: "app-category-tiles",
@@ -30,7 +31,7 @@ import { Todo } from "../../interfaces/todo.interface";
   styleUrl: "./category-tiles.component.scss",
 })
 export class CategoryTilesComponent extends UnsubscribeComponent {
-  @ViewChild("addNewCategoryDialogContent") addNewCategoryDialogContent!: TemplateRef<any>;
+  // @ViewChild("addNewCategoryDialogContent") addNewCategoryDialogContent!: TemplateRef<any>;
   public dialogRef!: MatDialogRef<any>;
 
   public newCategory?: string;
@@ -49,6 +50,7 @@ export class CategoryTilesComponent extends UnsubscribeComponent {
   public ngOnInit(): void {
     this.todoService.categories$.pipe(takeUntil(this.destroy$)).subscribe((categories) => {
       this.categories = categories;
+      console.log(this.categories);
     });
 
     this.todoService.toDoList$.pipe(takeUntil(this.destroy$)).subscribe((allTodos) => {
@@ -79,29 +81,6 @@ export class CategoryTilesComponent extends UnsubscribeComponent {
   }
 
   public onOpenCategoryAddDialog(): void {
-    this.dialogRef = this.dialog.open(this.addNewCategoryDialogContent, {
-      height: "260px",
-      width: "300px",
-      panelClass: "my-dialog",
-    });
-  }
-
-  public onAddCategory(value: { newCategory: string }): void {
-    const userCategory: Category = {
-      id: generateId(),
-      title: value.newCategory,
-      activeTodosCount: 0,
-      type: "user",
-    };
-
-    if (!value.newCategory) {
-      this.dialogRef.close();
-      return;
-    } else {
-      this.todoService.addUserCategory(userCategory);
-    }
-
-    this.newCategory = "";
-    this.dialogRef.close();
+    this.todoService.openDialog(AddCategoryComponent);
   }
 }

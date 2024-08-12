@@ -15,7 +15,7 @@ export class TodoService {
 
   //categories
   private defaultCategories: Category[] = [
-    { id: "1", title: "all", icon: "work.svg", activeTodosCount: 0, type: "default" },
+    { id: "1", title: "all", icon: "all.svg", activeTodosCount: 0, type: "default" },
     { id: "2", title: "work", icon: "work.svg", activeTodosCount: 0, type: "default" },
     { id: "3", title: "shopping", icon: "shopping.svg", activeTodosCount: 0, type: "default" },
     { id: "4", title: "sport", icon: "sport.svg", activeTodosCount: 0, type: "default" },
@@ -61,12 +61,21 @@ export class TodoService {
 
   //categories
   public addUserCategory(category: Category): void {
-    this.userCategories.unshift(category);
+    this.userCategories = [category, ...this.userCategories];
     this.updateCategories();
   }
 
-  public deleteUserCategory(categoryId: string): void {
-    this.userCategories.filter((category) => category.id !== categoryId);
+  public updateUserCategory(categoryId: string, updatedCategory: Partial<Category>): void {
+    this.userCategories = this.userCategories.map((category) =>
+      category.id === categoryId ? { ...category, ...updatedCategory } : category
+    );
+    this.updateCategories();
+  }
+
+  public deleteUserCategory(categoryId: string | undefined): void {
+    console.log("delete", categoryId);
+
+    this.userCategories = this.userCategories.filter((category) => category.id !== categoryId);
     this.updateCategories();
   }
 
@@ -76,7 +85,6 @@ export class TodoService {
 
   public openDialog<T>(component: ComponentType<T>, data?: any): MatDialogRef<T> {
     const dialogRef = this.dialog.open(component, {
-      height: "360px",
       width: "300px",
       panelClass: "my-dialog",
       data: data,
