@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TodoListItemComponent } from "./todo-list-item/todo-list-item.component";
 import { TodoService } from "../../services/todo.service";
@@ -6,7 +6,6 @@ import { Todo } from "../../interfaces/todo.interface";
 import { map, Observable, switchMap, takeUntil, tap } from "rxjs";
 import { AddNewTodoComponent } from "./add-new-todo/add-new-todo.component";
 import { UnsubscribeComponent } from "../../shared/unsubscribeComponent";
-// import { MatDialog } from "@angular/material/dialog";
 import { SideNavComponent } from "../../shared/side-nav/side-nav.component";
 import { MatChipsModule } from "@angular/material/chips";
 import { Category } from "../../interfaces/category.interface";
@@ -19,7 +18,9 @@ import { CommonModule } from "@angular/common";
   templateUrl: "./todo-list.component.html",
   styleUrl: "./todo-list.component.scss",
 })
-export class TodoListComponent extends UnsubscribeComponent implements OnInit {
+export class TodoListComponent extends UnsubscribeComponent implements OnInit, AfterViewInit {
+  private selectedChipEl?: HTMLElement;
+
   public activeCategory?: string | null | undefined;
   public categories$?: Observable<Category[]>;
 
@@ -28,7 +29,6 @@ export class TodoListComponent extends UnsubscribeComponent implements OnInit {
   public constructor(
     private route: ActivatedRoute,
     private todoService: TodoService,
-    // private dialog: MatDialog,
     private router: Router
   ) {
     super();
@@ -58,11 +58,18 @@ export class TodoListComponent extends UnsubscribeComponent implements OnInit {
       });
   }
 
+  public ngAfterViewInit(): void {
+    this.selectedChipEl?.scrollIntoView({ behavior: "smooth" });
+  }
+
+  public scrollToSelectedChip() {}
+
   public onOpenAddToDoDialog(): void {
     this.todoService.openDialog(AddNewTodoComponent);
   }
 
-  public onCategorySelect(title: string): void {
+  public onCategorySelect(event: any, title: string): void {
+    this.selectedChipEl = event.source._elementRef.nativeElement;
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { category: title },

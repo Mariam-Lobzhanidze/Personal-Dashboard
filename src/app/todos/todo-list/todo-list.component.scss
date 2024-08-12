@@ -21,45 +21,45 @@
     padding: 0px 15px;
     display: flex;
     flex-direction: column;
-    row-gap: 30px;
+    row-gap: 25px;
     background-position: fixed;
-    //
     position: relative;
+
+    @media (max-width: 600px) {
+      row-gap: 65px;
+    }
 
     &-controls {
       display: flex;
       flex-direction: column;
-      row-gap: 25px;
+      row-gap: 10px;
 
       .chips {
         position: static;
+
         @media (max-width: 600px) {
           position: absolute;
           top: 50px;
-          left: 0;
-          right: 0px;
+          left: 15px;
+          right: 15px;
           overflow-x: auto;
-          padding: 0px 0px 0px 20px;
         }
       }
 
       .add-button {
         cursor: pointer;
+        margin-left: -5px;
       }
     }
 
     .list-items {
-      padding: 30px 15px;
+      padding: 0px 15px 30px;
       display: flex;
       flex-direction: column;
       row-gap: 25px;
       height: 100%;
       overflow-y: auto;
       flex: 1;
-
-      @media (max-width: 768px) {
-        // box-shadow: inset 0px 5px 5px -5px rgba(0, 0, 0, 0.3), inset 0px -5px 5px -5px rgba(0, 0, 0, 0.3);
-      }
     }
 
     @media (max-width: 768px) {

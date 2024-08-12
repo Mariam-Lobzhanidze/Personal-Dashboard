@@ -1,14 +1,18 @@
 import { Injectable } from "@angular/core";
 import { Todo } from "../interfaces/todo.interface";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { Category } from "../interfaces/category.interface";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { ComponentType } from "@angular/cdk/portal";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: "root",
 })
 export class TodoService {
+  //reminders
+  private reminderSubject = new Subject<{ message: string; musicUrl: string }>();
+
   //categories
   private defaultCategories: Category[] = [
     { id: "1", title: "all", icon: "work.svg", activeTodosCount: 0, type: "default" },
@@ -34,7 +38,7 @@ export class TodoService {
   private toDoListSubject = new BehaviorSubject<Todo[]>(this.todos);
   public toDoList$ = this.toDoListSubject.asObservable();
 
-  public constructor(private dialog: MatDialog) {}
+  public constructor(private dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   public addNewToDoItem(item: Todo): void {
     this.todos = [item, ...this.todos];
@@ -79,5 +83,39 @@ export class TodoService {
     });
 
     return dialogRef;
+  }
+
+  //reminders
+
+  public scheduleReminder(
+    dueDate: Date,
+    message: string,
+    musicUrl: string,
+    reminderHour: number = 9,
+    reminderMinute: number = 0
+  ) {
+    const reminderDate = new Date(dueDate);
+    reminderDate.setHours(reminderHour, reminderMinute, 0, 0); // Set time to the desired hour (e.g., 9 AM)
+
+    const currentTime = new Date().getTime();
+    const reminderTime = reminderDate.getTime();
+    const timeDifference = reminderTime - currentTime;
+    console.log(currentTime, reminderTime, timeDifference);
+
+    if (timeDifference > 0) {
+      setTimeout(() => {
+        this.triggerReminder(message, musicUrl);
+      }, timeDifference);
+    } else {
+      console.warn("The due date is in the past or the reminder time has passed today. Reminder not set.");
+    }
+  }
+
+  private triggerReminder(message: string, musicUrl: string) {
+    this.snackBar.open(message, "Close", {
+      duration: 5000,
+    });
+    const audio = new Audio(musicUrl);
+    audio.play();
   }
 }

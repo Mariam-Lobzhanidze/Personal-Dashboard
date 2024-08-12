@@ -61,6 +61,20 @@ export class AddNewTodoComponent implements OnInit {
       createdAt: new Date(),
       dueDate: this.form.value.dueDate,
     };
+    console.log("new Item", toDoItem);
+
+    if (toDoItem.dueDate) {
+      const description = this.form.get("description")?.value;
+
+      // Schedule the reminder
+      this.todoService.scheduleReminder(
+        toDoItem.dueDate,
+        `Reminder: ${description}`,
+        "assets/sounds/reminder.wav",
+        23,
+        7
+      );
+    }
 
     if (this.form.valid) {
       if (!this.isEdited) {

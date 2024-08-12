@@ -10,8 +10,9 @@
   <div class="list-item-controls">
     @if(!listItem?.completed) {
     <div class="activation-time text-icon-aligned">
-      <img src="/assets/icons/fire.svg" alt="fire-icon" />
-      <p class="primary-colored">Today</p>
+      <img src="/assets/icons/alarm.svg" alt="fire-icon" />
+      <!-- <img src="/assets/icons/fire.svg" alt="fire-icon" /> -->
+      <p class="primary-colored"> {{ listItem?.dueDate | date }}</p>
     </div>
     <button
       (click)="onDetermineCompletionState(listItem?.id, true)"
