@@ -1,0 +1,19 @@
+<div class="time-select-container">
+  <div class="time-unit">
+    <button (click)="$event.preventDefault(); incrementHour()">&#9650;</button>
+    <span>{{ selectedHour | number : "2.0-0" }}</span>
+    <button (click)="$event.preventDefault(); decrementHour()">&#9660;</button>
+  </div>
+  <span>:</span>
+  <div class="time-unit">
+    <button (click)="$event.preventDefault(); incrementMinute()">&#9650;</button>
+    <span>{{ selectedMinute | number : "2.0-0" }}</span>
+    <button (click)="$event.preventDefault(); decrementMinute()">&#9660;</button>
+  </div>
+  <div class="period-select">
+    <mat-radio-group [(ngModel)]="period" name="period" aria-label="Select an option">
+      <mat-radio-button value="AM">AM</mat-radio-button>
+      <mat-radio-button value="PM">PM</mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>

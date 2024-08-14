@@ -11,7 +11,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class TodoService {
   //reminders
-  private reminderSubject = new Subject<{ message: string; musicUrl: string }>();
+  // private reminderSubject = new Subject<{ message: string; musicUrl: string }>();
 
   //categories
   private defaultCategories: Category[] = [
@@ -95,20 +95,11 @@ export class TodoService {
 
   //reminders
 
-  public scheduleReminder(
-    dueDate: Date,
-    message: string,
-    musicUrl: string,
-    reminderHour: number = 9,
-    reminderMinute: number = 0
-  ) {
-    const reminderDate = new Date(dueDate);
-    reminderDate.setHours(reminderHour, reminderMinute, 0, 0); // Set time to the desired hour (e.g., 9 AM)
-
+  public scheduleReminder(dueDate: Date, message: string, musicUrl: string) {
     const currentTime = new Date().getTime();
-    const reminderTime = reminderDate.getTime();
+    const reminderTime = dueDate.getTime();
     const timeDifference = reminderTime - currentTime;
-    console.log(currentTime, reminderTime, timeDifference);
+    // console.log(dueDate, currentTime, reminderTime, timeDifference);
 
     if (timeDifference > 0) {
       setTimeout(() => {

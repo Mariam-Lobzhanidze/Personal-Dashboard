@@ -6,20 +6,29 @@ import { Todo } from "../../interfaces/todo.interface";
 import { map, Observable, switchMap, takeUntil, tap } from "rxjs";
 import { AddNewTodoComponent } from "./add-new-todo/add-new-todo.component";
 import { UnsubscribeComponent } from "../../shared/unsubscribeComponent";
-import { SideNavComponent } from "../../shared/side-nav/side-nav.component";
+import { SideNavComponent } from "./side-nav/side-nav.component";
 import { MatChipsModule } from "@angular/material/chips";
 import { Category } from "../../interfaces/category.interface";
 import { CommonModule } from "@angular/common";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 @Component({
   selector: "app-todo-list",
   standalone: true,
-  imports: [TodoListItemComponent, AddNewTodoComponent, SideNavComponent, MatChipsModule, CommonModule],
+  imports: [
+    TodoListItemComponent,
+    AddNewTodoComponent,
+    SideNavComponent,
+    MatChipsModule,
+    CommonModule,
+    MatProgressBarModule,
+  ],
   templateUrl: "./todo-list.component.html",
   styleUrl: "./todo-list.component.scss",
 })
 export class TodoListComponent extends UnsubscribeComponent implements OnInit, AfterViewInit {
   private selectedChipEl?: HTMLElement;
+  public completionRateByCategory?: number;
 
   public activeCategory?: string | null | undefined;
   public categories$?: Observable<Category[]>;
@@ -55,6 +64,10 @@ export class TodoListComponent extends UnsubscribeComponent implements OnInit, A
       )
       .subscribe((toDos) => {
         this.todos = toDos;
+
+        const totalItems = this.todos.length;
+        const completedItems = this.todos.filter((todo) => todo.completed).length;
+        this.completionRateByCategory = totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
       });
   }
 
@@ -74,5 +87,9 @@ export class TodoListComponent extends UnsubscribeComponent implements OnInit, A
       relativeTo: this.route,
       queryParams: { category: title },
     });
+  }
+
+  public onBackToCategories(): void {
+    this.router.navigate(["todos"]);
   }
 }

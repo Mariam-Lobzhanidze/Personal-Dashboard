@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
@@ -8,16 +8,28 @@ import { TodoService } from "../../../services/todo.service";
 import { generateId } from "../../../shared/utils";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { TimeSelectComponent } from "../../time-select/time-select.component";
 
 @Component({
   selector: "app-add-new-todo",
   standalone: true,
-  imports: [MatInputModule, ReactiveFormsModule, MatButtonModule, MatDatepickerModule],
+  imports: [
+    TimeSelectComponent,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    TimeSelectComponent,
+  ],
 
   templateUrl: "./add-new-todo.component.html",
   styleUrl: "./add-new-todo.component.scss",
 })
 export class AddNewTodoComponent implements OnInit {
+  @ViewChild(TimeSelectComponent)
+  timeSelectComponent!: TimeSelectComponent;
+  public selectedTime?: any;
+
   private isEdited = false;
   readonly minDate = new Date();
   private activeCategory!: string;
@@ -61,19 +73,21 @@ export class AddNewTodoComponent implements OnInit {
       createdAt: new Date(),
       dueDate: this.form.value.dueDate,
     };
-    console.log("new Item", toDoItem);
 
     if (toDoItem.dueDate) {
-      const description = this.form.get("description")?.value;
-
       // Schedule the reminder
+      toDoItem?.dueDate?.setHours(
+        this.timeSelectComponent?.selectedTime.hours,
+        this.timeSelectComponent?.selectedTime.minutes
+      );
+
       this.todoService.scheduleReminder(
         toDoItem.dueDate,
-        `Reminder: ${description}`,
-        "assets/sounds/reminder.wav",
-        11,
-        5
+        `Reminder: ${toDoItem?.description}`,
+        "assets/sounds/reminder.wav"
       );
+
+      console.log(toDoItem.dueDate);
     }
 
     if (this.form.valid) {
@@ -87,5 +101,10 @@ export class AddNewTodoComponent implements OnInit {
       }
       this.dialogRef.close();
     }
+  }
+
+  public onTimeSelected(time: { hours: number; minutes: number; period: "AM" | "PM" }) {
+    this.selectedTime = time;
+    console.log(this.selectedTime);
   }
 }

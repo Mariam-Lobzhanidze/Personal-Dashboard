@@ -1,6 +1,6 @@
 <div class="categories">
-  <div class="add-custom-category" (click)="onOpenCategoryAddDialog()">
-    <img src="/assets/icons/plus.svg" alt="add-icon" />
+  <div class="categories-controls">
+    <img src="/assets/icons/plus.svg" alt="add-icon" (click)="onOpenCategoryAddDialog()" />
   </div>
   <div class="categories-tiles">
     @for(category of categories; track category.id) {

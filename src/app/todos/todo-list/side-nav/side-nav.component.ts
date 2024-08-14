@@ -3,8 +3,8 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
 import { MatIconModule } from "@angular/material/icon";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
-import { TodoService } from "../../services/todo.service";
-import { UnsubscribeComponent } from "../unsubscribeComponent";
+import { TodoService } from "../../../services/todo.service";
+import { UnsubscribeComponent } from "../../../shared/unsubscribeComponent";
 import { takeUntil } from "rxjs";
 
 @Component({
