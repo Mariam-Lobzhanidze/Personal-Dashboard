@@ -1,19 +1,24 @@
+<!-- time-select.component.html -->
 <div class="time-select-container">
-  <div class="time-unit">
-    <button (click)="$event.preventDefault(); incrementHour()">&#9650;</button>
-    <span>{{ selectedHour | number : "2.0-0" }}</span>
-    <button (click)="$event.preventDefault(); decrementHour()">&#9660;</button>
-  </div>
-  <span>:</span>
-  <div class="time-unit">
-    <button (click)="$event.preventDefault(); incrementMinute()">&#9650;</button>
-    <span>{{ selectedMinute | number : "2.0-0" }}</span>
-    <button (click)="$event.preventDefault(); decrementMinute()">&#9660;</button>
-  </div>
-  <div class="period-select">
-    <mat-radio-group [(ngModel)]="period" name="period" aria-label="Select an option">
-      <mat-radio-button value="AM">AM</mat-radio-button>
-      <mat-radio-button value="PM">PM</mat-radio-button>
+  <div class="period-select-container">
+    <mat-radio-group class="period-select" [(ngModel)]="period" name="period" aria-label="Select an option">
+      <mat-radio-button class="period-select-button" color="primary" value="AM">AM</mat-radio-button>
+      <mat-radio-button class="period-select-button" color="primary" value="PM">PM</mat-radio-button>
     </mat-radio-group>
+  </div>
+  <div class="hour-minutes-container">
+    <mat-form-field>
+      <mat-label>Hours</mat-label>
+      <mat-select [(ngModel)]="selectedHour" aria-label="Hour select" required>
+        <mat-option *ngFor="let hour of hours" [value]="hour.value">{{ hour.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Minutes</mat-label>
+      <mat-select [(ngModel)]="selectedMinute" aria-label="Minute select" required>
+        <mat-option *ngFor="let minute of minutes" [value]="minute.value">{{ minute.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 </div>

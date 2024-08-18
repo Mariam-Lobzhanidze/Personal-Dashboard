@@ -41,9 +41,18 @@
         justify-content: space-between;
         align-items: center;
 
-        img {
+        .icon {
           cursor: pointer;
           margin-left: -5px;
+        }
+
+        .title {
+          display: flex;
+          align-items: center;
+          column-gap: 5px;
+          color: $primary-color;
+          font-weight: 600;
+          font-size: 18px;
         }
       }
 
@@ -61,11 +70,20 @@
       .completion-progress {
         display: flex;
         flex-direction: column;
-        span {
-          color: $secondary-color-tint-500;
-          font-size: 14px;
-          align-self: flex-end;
+        row-gap: 5px;
+
+        &-percent {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          span {
+            color: $secondary-color-tint-500;
+            font-size: 14px;
+            align-self: flex-end;
+          }
         }
+
         @media (min-width: 768px) {
           display: none;
         }

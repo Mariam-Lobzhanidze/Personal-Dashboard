@@ -1,0 +1,9 @@
+@import "variables";
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  color: $primary-color-shade-300;
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+}

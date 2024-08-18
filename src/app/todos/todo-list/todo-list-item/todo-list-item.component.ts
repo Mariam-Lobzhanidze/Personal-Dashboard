@@ -28,22 +28,29 @@ export class TodoListItemComponent {
       icon: "/assets/icons/delete.svg",
       title: "delete",
     },
-    {
-      icon: "/assets/icons/notify.svg",
-      title: "disable",
-    },
+    // {
+    //   icon: "/assets/icons/notify.svg",
+    //   title: "disable",
+    // },
   ];
 
   public constructor(private todoService: TodoService) {}
 
+  public get filteredMenuItems(): { icon: string; title: string }[] {
+    if (this.listItem?.completed) {
+      return this.menuItems.filter((item) => item.title !== "edit");
+    }
+    return this.menuItems;
+  }
+
   public onDetermineCompletionState(toDoItemId: string | undefined, completed: boolean): void {
     this.todoService.updateToDoItem(toDoItemId, { completed: completed });
     if (completed) {
-      this.playSoundAndConfetti();
+      this.playConfetti();
     }
   }
 
-  private playSoundAndConfetti(): void {
+  private playConfetti(): void {
     confetti({
       shapes: ["square"],
       particleCount: 100,

@@ -1,43 +1,38 @@
 .time-select-container {
   display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.time-unit {
-  display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
+  // row-gap: 15px;
+}
+.hour-minutes-container {
+  display: flex;
+  column-gap: 10px;
+  // flex-direction: column;
+  // row-gap: 10px;
+  // align-items: center;
+  .time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  span {
-    font-size: 1.5em;
-    padding: 5px;
-  }
+    img {
+      cursor: pointer;
+    }
 
-  button {
-    background: none;
-    border: none;
-    font-size: 1.2em;
-    cursor: pointer;
-    padding: 0 5px;
-
-    &:hover {
-      color: #007bff;
+    span {
+      font-size: 20px;
     }
   }
 }
 
-.period-select {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
+//to material
+// .period-select {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
 
-  label {
-    cursor: pointer;
+//   .mat-mdc-radio-button .mdc-radio {
+//     padding: 5px;
+//   }
 
-    input[type="radio"] {
-      margin-right: 4px;
-    }
-  }
-}
+// }

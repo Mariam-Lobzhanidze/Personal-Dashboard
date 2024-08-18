@@ -19,7 +19,7 @@ a {
 .form {
   display: flex;
   flex-direction: column;
-  row-gap: 30px;
+  row-gap: 15px;
   height: 100%;
 
   &-title {
@@ -29,6 +29,10 @@ a {
 
   &-inputs {
     flex: 1;
+    // background-color: red;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
   }
 
   &-actions {

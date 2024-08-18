@@ -1,6 +1,6 @@
 <div class="list-item" [ngClass]="{ completed: listItem?.completed }">
   <div class="list-item-menu-wrapper">
-    <app-edit-menu (menuItemClicked)="onMenuItemClicked($event)" [items]="menuItems"> </app-edit-menu>
+    <app-edit-menu (menuItemClicked)="onMenuItemClicked($event)" [items]="filteredMenuItems"> </app-edit-menu>
   </div>
   <div class="list-item-top">
     <div class="list-item-top-task">

@@ -5,8 +5,14 @@
   <div class="todo-list-content">
     <div class="todo-list-content-controls">
       <div class="btns">
-        <img src="/assets/icons/arrow-back.svg" alt="arrow-icon" (click)="onBackToCategories()" />
-        <img src="/assets/icons/plus.svg" alt="add-icon" (click)="onOpenAddToDoDialog()" />
+        <img
+          class="icon"
+          src="/assets/icons/arrow-back.svg"
+          alt="arrow-icon"
+          (click)="onBackToCategories()" />
+        <p class="title">ToDoAlert<img src="/assets/icons/alarm.svg" alt="alert" /></p>
+        <!-- <p class="title">ToDoAlert</p> -->
+        <img class="icon" src="/assets/icons/plus.svg" alt="add-icon" (click)="onOpenAddToDoDialog()" />
       </div>
 
       <div class="chips">
@@ -23,7 +29,11 @@
         </mat-chip-listbox>
       </div>
       <div class="completion-progress">
-        <span>{{ completionRateByCategory }} %</span>
+        <div class="completion-progress-percent">
+          <span>Completion rate</span>
+          <span>{{ completionRateByCategory }} %</span>
+        </div>
+
         <mat-progress-bar
           color="accent"
           mode="determinate"

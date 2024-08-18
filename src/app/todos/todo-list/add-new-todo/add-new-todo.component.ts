@@ -46,7 +46,7 @@ export class AddNewTodoComponent implements OnInit {
   public ngOnInit(): void {
     this.form = this.fb.group({
       description: this.fb.control("", Validators.required),
-      dueDate: this.fb.control(""),
+      dueDate: this.fb.control("",Validators.required),
     });
 
     this.isEdited = !!this.data;
