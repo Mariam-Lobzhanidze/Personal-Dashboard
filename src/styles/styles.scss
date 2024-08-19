@@ -16,23 +16,27 @@ a {
   text-decoration: none;
 }
 
+//dialog form style
+
 .form {
   display: flex;
   flex-direction: column;
-  row-gap: 15px;
-  height: 100%;
-
-  &-title {
-    color: $text-color;
-    font-weight: 600;
-  }
+  row-gap: 10px;
+  // height: 100%;
 
   &-inputs {
     flex: 1;
-    // background-color: red;
     display: flex;
     flex-direction: column;
-    row-gap: 15px;
+    row-gap: 14px;
+
+    .title {
+      font-weight: 600;
+      color: $primary-color-shade-300;
+      display: flex;
+      align-items: center;
+      column-gap: 8px;
+    }
   }
 
   &-actions {
@@ -42,29 +46,27 @@ a {
   }
 }
 
-.text-icon-aligned {
+//
+
+.text-icon-aligned-center {
   display: flex;
   column-gap: 6px;
   align-items: center;
 }
 
-.aligned-space-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 .primary-colored {
   color: $primary-color;
 }
 
-.secondary-colored {
-  color: $secondary-color;
-}
+// .secondary-colored {
+//   color: $secondary-color;
+// }
 
 .secondary-light-colored {
   color: $secondary-color-tint-500;
 }
 
+// scrollbar styles
 @media (min-width: 601px) {
   ::-webkit-scrollbar {
     width: 6px;
@@ -76,22 +78,23 @@ a {
   }
 
   ::-webkit-scrollbar-thumb {
-    // background: $primary-color;
     background-color: $secondary-color-tint-600;
     border-radius: 8px;
     cursor: pointer;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    // background: $primary-color-tint-500;
     background: $secondary-color-tint-700;
   }
 }
+
 @media (max-width: 600px) {
   ::-webkit-scrollbar {
     width: 4px;
   }
 }
+
+//
 .error-message {
   font-size: 14px;
   color: #e62929;

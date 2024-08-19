@@ -6,15 +6,25 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { TodoService } from "../../../services/todo.service";
 import { UnsubscribeComponent } from "../../../shared/unsubscribeComponent";
 import { takeUntil } from "rxjs";
+import { MatRadioModule } from "@angular/material/radio";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-side-nav",
   standalone: true,
-  imports: [MatSidenavModule, MatListModule, MatIconModule, MatProgressBarModule],
+  imports: [
+    FormsModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatRadioModule,
+  ],
   templateUrl: "./side-nav.component.html",
   styleUrl: "./side-nav.component.scss",
 })
 export class SideNavComponent extends UnsubscribeComponent implements OnInit {
+  public completionState: "active" | "completed" = "active";
   public toDosByCategory?: any[];
 
   public constructor(private todoService: TodoService) {

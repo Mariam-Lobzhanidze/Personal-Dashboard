@@ -1,18 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Todo } from "../interfaces/todo.interface";
-import { BehaviorSubject, Subject } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import { Category } from "../interfaces/category.interface";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { ComponentType } from "@angular/cdk/portal";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { SharedService } from "./shared.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class TodoService {
-  //reminders
-  // private reminderSubject = new Subject<{ message: string; musicUrl: string }>();
-
   //categories
   private defaultCategories: Category[] = [
     { id: "1", title: "all", icon: "all.svg", activeTodosCount: 0, type: "default" },
@@ -38,7 +33,7 @@ export class TodoService {
   private toDoListSubject = new BehaviorSubject<Todo[]>(this.todos);
   public toDoList$ = this.toDoListSubject.asObservable();
 
-  public constructor(private dialog: MatDialog, private snackBar: MatSnackBar) {}
+  public constructor(private sharedService: SharedService) {}
 
   public addNewToDoItem(item: Todo): void {
     this.todos = [item, ...this.todos];
@@ -59,8 +54,17 @@ export class TodoService {
     this.toDoListSubject.next([...this.todos]);
   }
 
-  //categories
+  //categories methods
   public addUserCategory(category: Category): void {
+    if (
+      [...this.userCategories, ...this.defaultCategories].some(
+        (cat) => cat.title.toLowerCase() === category.title.toLowerCase()
+      )
+    ) {
+      this.sharedService.showSnackbar("Category with this name already exists", 5000, "top");
+      return;
+    }
+
     this.userCategories = [category, ...this.userCategories];
     this.updateCategories();
   }
@@ -73,8 +77,6 @@ export class TodoService {
   }
 
   public deleteUserCategory(categoryId: string | undefined): void {
-    console.log("delete", categoryId);
-
     this.userCategories = this.userCategories.filter((category) => category.id !== categoryId);
     this.updateCategories();
   }
@@ -83,37 +85,28 @@ export class TodoService {
     this.categoriesSubject.next([...this.userCategories, ...this.defaultCategories]);
   }
 
-  public openDialog<T>(component: ComponentType<T>, data?: any): MatDialogRef<T> {
-    const dialogRef = this.dialog.open(component, {
-      width: "300px",
-      panelClass: "my-dialog",
-      data: data,
-    });
-
-    return dialogRef;
-  }
-
-  //reminders
+  //reminders for to do list items
 
   public scheduleReminder(dueDate: Date, message: string, musicUrl: string) {
     const currentTime = new Date().getTime();
     const reminderTime = dueDate.getTime();
     const timeDifference = reminderTime - currentTime;
-    // console.log(dueDate, currentTime, reminderTime, timeDifference);
 
     if (timeDifference > 0) {
       setTimeout(() => {
         this.triggerReminder(message, musicUrl);
       }, timeDifference);
     } else {
-      console.warn("The due date is in the past or the reminder time has passed today. Reminder not set.");
+      this.sharedService.showSnackbar(
+        "Choose a future time. The selected time has already passed!",
+        5000,
+        "top"
+      );
     }
   }
 
   private triggerReminder(message: string, musicUrl: string) {
-    this.snackBar.open(message, "Close", {
-      duration: 5000,
-    });
+    this.sharedService.showSnackbar(message, 5000, "top");
     const audio = new Audio(musicUrl);
     audio.play();
   }

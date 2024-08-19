@@ -1,7 +1,11 @@
 <!-- time-select.component.html -->
 <div class="time-select-container">
   <div class="period-select-container">
-    <mat-radio-group class="period-select" [(ngModel)]="period" name="period" aria-label="Select an option">
+    <mat-radio-group
+      class="time-period-radio-group"
+      [(ngModel)]="period"
+      name="period"
+      aria-label="Select an option">
       <mat-radio-button class="period-select-button" color="primary" value="AM">AM</mat-radio-button>
       <mat-radio-button class="period-select-button" color="primary" value="PM">PM</mat-radio-button>
     </mat-radio-group>

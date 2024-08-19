@@ -9,9 +9,8 @@
   </div>
   <div class="list-item-controls">
     @if(!listItem?.completed) {
-    <div class="activation-time text-icon-aligned">
+    <div class="activation-time text-icon-aligned-center">
       <img src="/assets/icons/alarm.svg" alt="fire-icon" />
-      <!-- <img src="/assets/icons/fire.svg" alt="fire-icon" /> -->
       <p class="primary-colored"> {{ listItem?.dueDate | date }}</p>
     </div>
     <button
@@ -23,7 +22,7 @@
     >
     } @else {
     <div class="list-item-bottom-completed">
-      <div class="text-icon-aligned">
+      <div class="text-icon-aligned-center">
         <img src="/assets/icons/check.svg" alt="check" />
         <p class="secondary-light-colored">Completed</p>
       </div>

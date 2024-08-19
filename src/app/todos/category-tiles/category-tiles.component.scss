@@ -6,20 +6,27 @@
   max-height: 70vh;
   padding: 0px 10px;
 
-  @media (max-width: 768px) {
-  }
-
-  &-controls {
-    // width: 100%;
-    // background-color: red;
+  &-header {
     display: flex;
     justify-content: flex-start;
-    // justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    svg {
-      width: 60px;
-      height: 60px;
+    position: relative;
+
+    &-title {
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+      color: $primary-color;
+      font-weight: 600;
+      font-size: 18px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
     }
 
     @media (max-width: 768px) {
@@ -29,12 +36,6 @@
       border: none;
       background-color: transparent;
       box-shadow: none;
-      // justify-content: flex-start;
-
-      svg {
-        width: 50px;
-        height: 50px;
-      }
     }
   }
   //
@@ -43,7 +44,6 @@
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: min-content;
     gap: 20px;
-    // height: 100%;
     overflow-y: auto;
     padding-right: 15px;
 

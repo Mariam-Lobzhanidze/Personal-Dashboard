@@ -1,10 +1,10 @@
-import { Component, TemplateRef, ViewChild } from "@angular/core";
+import { Component } from "@angular/core";
 import { Category } from "../../interfaces/category.interface";
 import { TodoService } from "../../services/todo.service";
 import { CommonModule } from "@angular/common";
 import { CategoryTileComponent } from "./category-tile/category-tile.component";
 import { ActivatedRoute, Router } from "@angular/router";
-import { MatDialog, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { FormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
@@ -14,6 +14,7 @@ import { takeUntil } from "rxjs";
 import { UnsubscribeComponent } from "../../shared/unsubscribeComponent";
 import { Todo } from "../../interfaces/todo.interface";
 import { AddCategoryComponent } from "./add-category/add-category.component";
+import { SharedService } from "../../services/shared.service";
 
 @Component({
   selector: "app-category-tiles",
@@ -31,7 +32,6 @@ import { AddCategoryComponent } from "./add-category/add-category.component";
   styleUrl: "./category-tiles.component.scss",
 })
 export class CategoryTilesComponent extends UnsubscribeComponent {
-  // @ViewChild("addNewCategoryDialogContent") addNewCategoryDialogContent!: TemplateRef<any>;
   public dialogRef!: MatDialogRef<any>;
 
   public newCategory?: string;
@@ -42,7 +42,7 @@ export class CategoryTilesComponent extends UnsubscribeComponent {
     private todoService: TodoService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private sharedService: SharedService
   ) {
     super();
   }
@@ -81,6 +81,6 @@ export class CategoryTilesComponent extends UnsubscribeComponent {
   }
 
   public onOpenCategoryAddDialog(): void {
-    this.todoService.openDialog(AddCategoryComponent);
+    this.sharedService.openDialog(AddCategoryComponent);
   }
 }

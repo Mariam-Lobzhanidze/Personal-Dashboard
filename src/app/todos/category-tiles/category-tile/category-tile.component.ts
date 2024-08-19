@@ -1,10 +1,10 @@
 import { Component, Input } from "@angular/core";
-
 import { Category } from "../../../interfaces/category.interface";
 import { CommonModule } from "@angular/common";
 import { EditMenuComponent } from "../../../shared/edit-menu/edit-menu.component";
 import { TodoService } from "../../../services/todo.service";
 import { AddCategoryComponent } from "../add-category/add-category.component";
+import { SharedService } from "../../../services/shared.service";
 
 @Component({
   selector: "app-to-do-category-tile",
@@ -27,22 +27,18 @@ export class CategoryTileComponent {
     },
   ];
 
-  public constructor(private todoService: TodoService) {}
+  public constructor(private todoService: TodoService, private sharedService: SharedService) {}
 
   public onMenuItemClicked(action: string) {
     switch (action) {
       case "edit":
-        this.todoService.openDialog(AddCategoryComponent, {
+        this.sharedService.openDialog(AddCategoryComponent, {
           category: this.toDoCategory,
         });
 
         break;
       case "delete":
         this.todoService.deleteUserCategory(this.toDoCategory?.id);
-        break;
-      case "disable":
-        break;
-      case "enable":
         break;
     }
   }

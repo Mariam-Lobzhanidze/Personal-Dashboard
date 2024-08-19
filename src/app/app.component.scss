@@ -13,18 +13,11 @@
 
   &-content {
     flex-grow: 1;
-    // background-color: yellow;
     min-height: 0;
-    @media (max-width: 768px) {
-      // align-content: flex-start;
-    }
   }
 
   &-footer {
     padding: 15px 0px;
     height: 100px;
-  }
-
-  @media (max-width: 768px) {
   }
 }

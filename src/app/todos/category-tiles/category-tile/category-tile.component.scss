@@ -1,16 +1,11 @@
 @import "variables";
-@import "mixins";
-
-@mixin flex-column($row-gap: 20px, $column-gap: 20px) {
-  display: flex;
-  flex-direction: column;
-  row-gap: $row-gap;
-  justify-content: center;
-  align-items: center;
-}
 
 .category-tile {
-  @include flex-column(30px);
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  justify-content: center;
+  align-items: center;
   background-color: $list-item-active-background-color;
   padding: 15px;
   box-shadow: 0px 10px 20px rgba(black, 0.3);
@@ -21,7 +16,11 @@
   position: relative;
 
   .text-block {
-    @include flex-column(15px);
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    justify-content: center;
+    align-items: center;
 
     @media (max-width: 768px) {
       align-items: flex-end;
@@ -94,13 +93,17 @@
       border-radius: 4px;
       visibility: hidden;
       transition: all 0.3 ease;
-      @include flex-horizontal(10px);
+      display: flex;
+      column-gap: 10px;
+      align-items: center;
       &-action {
         background-color: $primary-color-tint-700;
         border-radius: 4px;
         width: 22px;
         height: 22px;
-        @include centered();
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       &::after {
         content: "";

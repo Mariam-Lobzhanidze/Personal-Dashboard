@@ -1,18 +1,14 @@
 <form class="form" [formGroup]="form" (ngSubmit)="submit()">
-  <p class="title">Add to do description <img src="/assets/icons/list-plus.svg" /></p>
   <div class="form-inputs">
-    <div class="input">
-      <mat-form-field>
-        <!-- <mat-label>Description</mat-label> -->
-        <input formControlName="description" type="text" matInput placeholder="E.g Finish design" />
-        <mat-error> <span class="error-message">* Please add description</span></mat-error>
-      </mat-form-field>
-    </div>
+    <p class="title">Add to do description <img src="/assets/icons/list-plus.svg" /></p>
+    <mat-form-field>
+      <input formControlName="description" type="text" matInput placeholder="E.g Finish design" />
+      <mat-error> <span class="error-message">* Please add description</span></mat-error>
+    </mat-form-field>
 
     <p class="title">Set date and time <img src="/assets/icons/bell.svg" /></p>
 
     <mat-form-field>
-      <!-- <mat-label>Date</mat-label> -->
       <input readonly [min]="minDate" formControlName="dueDate" matInput [matDatepicker]="picker" />
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>

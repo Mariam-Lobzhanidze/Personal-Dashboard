@@ -9,6 +9,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { EditMenuComponent } from "../../../shared/edit-menu/edit-menu.component";
 import { AddNewTodoComponent } from "../add-new-todo/add-new-todo.component";
 import confetti from "canvas-confetti";
+import { SharedService } from "../../../services/shared.service";
 @Component({
   selector: "app-todo-list-item",
   standalone: true,
@@ -28,13 +29,9 @@ export class TodoListItemComponent {
       icon: "/assets/icons/delete.svg",
       title: "delete",
     },
-    // {
-    //   icon: "/assets/icons/notify.svg",
-    //   title: "disable",
-    // },
   ];
 
-  public constructor(private todoService: TodoService) {}
+  public constructor(private todoService: TodoService, private sharedService: SharedService) {}
 
   public get filteredMenuItems(): { icon: string; title: string }[] {
     if (this.listItem?.completed) {
@@ -77,15 +74,11 @@ export class TodoListItemComponent {
       case "delete":
         this.todoService.deleteTodo(this.listItem?.id);
         break;
-      case "disable":
-        break;
-      case "enable":
-        break;
     }
   }
 
   public openDialogToEditTodo() {
-    this.todoService.openDialog(AddNewTodoComponent, {
+    this.sharedService.openDialog(AddNewTodoComponent, {
       description: this.listItem?.description,
       dueDate: this.listItem?.dueDate,
       id: this.listItem?.id,

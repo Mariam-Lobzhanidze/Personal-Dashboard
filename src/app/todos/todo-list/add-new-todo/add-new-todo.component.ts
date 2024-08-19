@@ -46,7 +46,7 @@ export class AddNewTodoComponent implements OnInit {
   public ngOnInit(): void {
     this.form = this.fb.group({
       description: this.fb.control("", Validators.required),
-      dueDate: this.fb.control("",Validators.required),
+      dueDate: this.fb.control("", Validators.required),
     });
 
     this.isEdited = !!this.data;
@@ -105,6 +105,6 @@ export class AddNewTodoComponent implements OnInit {
 
   public onTimeSelected(time: { hours: number; minutes: number; period: "AM" | "PM" }) {
     this.selectedTime = time;
-    console.log(this.selectedTime);
+    // console.log(this.selectedTime);
   }
 }

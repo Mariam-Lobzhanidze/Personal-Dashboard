@@ -2,7 +2,7 @@
   (click)="$event.stopPropagation()"
   [matMenuTriggerFor]="menu"
   src="/assets/icons/dots-vertical.svg"
-  alt="edit-icon" />
+  alt="vertical-dots-icon" />
 <mat-menu class="my-menu" #menu="matMenu" xPosition="before" yPosition="below">
   @for(item of items; track item.title) {
   <button (click)="onMenuItemClick(item.title)" mat-menu-item>

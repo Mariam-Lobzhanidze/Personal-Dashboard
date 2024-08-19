@@ -1,10 +1,6 @@
 @use "@angular/material" as mat;
 @include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-
 $custom-secondary-palette: (
   50: #f0fae7,
   100: #d8f1c2,
@@ -78,11 +74,8 @@ $custom-primary-palette: (
 $personal_dashboard-primary: mat.define-palette($custom-primary-palette);
 $personal_dashboard-accent: mat.define-palette($custom-secondary-palette);
 
-// The warn palette is optional (defaults to red).
 $personal_dashboard-warn: mat.define-palette(mat.$red-palette);
 
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
 $personal_dashboard-theme: mat.define-light-theme(
   (
     color: (
@@ -95,13 +88,11 @@ $personal_dashboard-theme: mat.define-light-theme(
   )
 );
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
 @include mat.all-component-themes($personal_dashboard-theme);
 
 @import "variables";
 
+//material dialog shared styles
 .my-dialog {
   mat-dialog-container {
     border-radius: 8px;
@@ -112,7 +103,7 @@ $personal_dashboard-theme: mat.define-light-theme(
     }
   }
 }
-
+//material form-field styles
 .mat-mdc-form-field {
   width: 100%;
 
@@ -121,10 +112,13 @@ $personal_dashboard-theme: mat.define-light-theme(
   }
 }
 
+//material button styles
+
 .mdc-button {
   width: 100%;
 }
 
+//material menu styles
 .mat-mdc-menu-panel {
   min-width: 90px;
   background-color: $secondary-color-tint-100;
@@ -148,7 +142,7 @@ $personal_dashboard-theme: mat.define-light-theme(
     }
   }
 }
-
+//material sidenav styles
 mat-sidenav {
   width: 100%;
   height: 100%;
@@ -183,88 +177,9 @@ mat-sidenav {
       align-self: flex-start;
       width: 100%;
     }
-
-    .completion-cards {
-      display: flex;
-      flex-direction: column;
-      row-gap: 12px;
-      width: 80%;
-
-      // &-title {
-      //   color: $primary-color-tint-300;
-      //   font-size: 12px;
-      // }
-
-      &-list {
-        display: flex;
-        flex-direction: column;
-        row-gap: 20px;
-
-        .category-card {
-          height: auto;
-          padding: 15px;
-          background-color: $list-item-active-background-color;
-          border-radius: 8px;
-          box-shadow: 0px 5px 9px rgba(black, 0.4);
-          color: $secondary-color-tint-500;
-          display: flex;
-          flex-direction: column;
-          row-gap: 20px;
-
-          &-top {
-            &-title {
-              font-weight: 600;
-            }
-            &-percent {
-              font-size: 14px;
-            }
-          }
-        }
-      }
-    }
   }
 }
-
-// .mat-expansion-panel {
-//   background-color: transparent !important;
-//   font-family: Verdana, Geneva, Tahoma, sans-serif !important;
-//   box-shadow: none !important;
-//   width: 100% !important;
-//   .mat-expansion-panel-header {
-//     justify-content: space-between;
-//     align-items: center;
-
-//     .mat-expansion-panel-header-title {
-//       color: $secondary-color-tint-500;
-//       font-family: Verdana, Geneva, Tahoma, sans-serif;
-
-//       font-weight: 600;
-//     }
-//     .mat-expansion-indicator::after {
-//       color: $secondary-color-tint-500;
-//     }
-//   }
-
-//   .mat-expansion-panel-body {
-//     color: $secondary-color-tint-500;
-//   }
-// }
-
-// .mat-mdc-chip-set {
-//   .mdc-evolution-chip-set__chips {
-//     .mat-mdc-chip {
-//       background-color: $secondary-color-tint-100;
-
-//       .mdc-evolution-chip__action {
-//         cursor: pointer;
-//       }
-//       &:hover {
-//         background-color: $secondary-color-tint-300;
-//       }
-//     }
-//   }
-// }
-
+// material chips styles
 .mat-mdc-chip-listbox {
   .mdc-evolution-chip-set__chips {
     flex-wrap: wrap !important;
@@ -283,15 +198,28 @@ mat-sidenav {
   }
 }
 
-//radio buttons
+//material radio buttons styles
 
-.period-select {
+.time-period-radio-group {
   display: flex;
   column-gap: 15px;
-  // flex-direction: column;
   align-items: center;
 
   .mat-mdc-radio-button .mdc-radio {
-    padding: 7px;
+    padding: 12px;
   }
 }
+.completion-radio-group {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  padding-left: 16px;
+  .mat-mdc-radio-button .mdc-radio {
+    // color: $primary-color;
+  }
+}
+
+// .mdc-form-field > label {
+//   color: $primary-color !important;
+// }

@@ -1,39 +1,52 @@
 <mat-sidenav [opened]="true" mode="side">
+  <mat-radio-group
+    class="completion-radio-group"
+    [(ngModel)]="completionState"
+    name="completionState"
+    aria-label="Select an option">
+    <mat-radio-button color="primary" value="active">Active</mat-radio-button>
+    <mat-radio-button color="primary" value="completed">Completed</mat-radio-button>
+  </mat-radio-group>
   <mat-nav-list>
     <a mat-list-item>
       <span class="entry">
         <mat-icon>house</mat-icon>
-        <span>Today</span>
+        <span>Due Today</span>
       </span>
     </a>
     <a mat-list-item>
       <span class="entry">
         <mat-icon>house</mat-icon>
-        <span>Dashboard</span>
+        <span>Due Tomorrow</span>
       </span>
     </a>
     <a mat-list-item>
       <span class="entry">
         <mat-icon>house</mat-icon>
-        <span>Dashboard</span>
+        <span>Upcoming</span>
+      </span>
+    </a>
+    <a mat-list-item>
+      <span class="entry">
+        <mat-icon>house</mat-icon>
+        <span>Overdue</span>
       </span>
     </a>
   </mat-nav-list>
+
+  <!-- <p> completed not completed with checkboxes</p> -->
   <div class="completion-cards">
-    <!-- <span class="completion-cards-title">Completion Rate</span> -->
-    <div class="completion-cards-list">
-      @for(toDoByCategory of toDosByCategory; track toDoByCategory?.categoryName) {
-      <div class="category-card">
-        <div class="category-card-top aligned-space-between">
-          <p class="category-card-top-title">{{ toDoByCategory?.categoryName }}</p>
-          <span class="category-card-top-percent">{{ toDoByCategory.completionRate }} %</span>
-        </div>
-        <mat-progress-bar
-          color="accent"
-          mode="determinate"
-          [value]="toDoByCategory?.completionRate"></mat-progress-bar>
+    @for(toDoByCategory of toDosByCategory; track toDoByCategory?.categoryName) {
+    <div class="category-card">
+      <div class="category-card-top primary-colored">
+        <p>{{ toDoByCategory?.categoryName }}</p>
+        <span>{{ toDoByCategory.completionRate }} %</span>
       </div>
-      }
+      <mat-progress-bar
+        color="accent"
+        mode="determinate"
+        [value]="toDoByCategory?.completionRate"></mat-progress-bar>
     </div>
+    }
   </div>
 </mat-sidenav>

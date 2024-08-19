@@ -1,6 +1,5 @@
 import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-
 import { MatMenuModule } from "@angular/material/menu";
 
 @Component({
@@ -11,11 +10,11 @@ import { MatMenuModule } from "@angular/material/menu";
   styleUrl: "./edit-menu.component.scss",
 })
 export class EditMenuComponent {
-  @Input() items: { icon: string; title: string }[] = [];
+  @Input() public items: { icon: string; title: string }[] = [];
 
-  @Output() menuItemClicked = new EventEmitter<string>();
+  @Output() public menuItemClicked = new EventEmitter<string>();
 
-  public onMenuItemClick(title: string) {
+  public onMenuItemClick(title: string): void {
     this.menuItemClicked.emit(title);
   }
 }

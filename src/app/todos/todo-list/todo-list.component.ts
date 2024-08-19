@@ -11,6 +11,7 @@ import { MatChipsModule } from "@angular/material/chips";
 import { Category } from "../../interfaces/category.interface";
 import { CommonModule } from "@angular/common";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { SharedService } from "../../services/shared.service";
 
 @Component({
   selector: "app-todo-list",
@@ -38,7 +39,8 @@ export class TodoListComponent extends UnsubscribeComponent implements OnInit, A
   public constructor(
     private route: ActivatedRoute,
     private todoService: TodoService,
-    private router: Router
+    private router: Router,
+    private sharedService: SharedService
   ) {
     super();
   }
@@ -78,7 +80,7 @@ export class TodoListComponent extends UnsubscribeComponent implements OnInit, A
   public scrollToSelectedChip() {}
 
   public onOpenAddToDoDialog(): void {
-    this.todoService.openDialog(AddNewTodoComponent);
+    this.sharedService.openDialog(AddNewTodoComponent);
   }
 
   public onCategorySelect(event: any, title: string): void {
