@@ -4,6 +4,6 @@ export interface Todo {
   completed: boolean;
   categoryId?: string;
   categoryName: string;
-  createdAt?: Date;
-  dueDate?: Date;
+  createdAt: Date;
+  dueDate: Date;
 }

@@ -88,6 +88,7 @@ export class TodoListComponent extends UnsubscribeComponent implements OnInit, A
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { category: title },
+      queryParamsHandling: "merge",
     });
   }
 

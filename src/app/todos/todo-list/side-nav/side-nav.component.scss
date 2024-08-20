@@ -1,27 +1,50 @@
 @import "variables";
 
-.completion-cards {
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-  width: 80%;
+:host {
+  ::ng-deep {
+    .mat-mdc-radio-button .mdc-label {
+      color: $secondary-color-tint-400;
+    }
+  }
 
-  .category-card {
-    height: auto;
-    padding: 15px;
-    background-color: $list-item-active-background-color;
-    border-radius: 8px;
-    box-shadow: 0px 5px 9px rgba(black, 0.4);
-    color: $secondary-color-tint-500;
+  .filter-by {
+    span {
+      font-size: 14px;
+      color: $primary-color;
+    }
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    row-gap: 14px;
+    align-self: flex-start;
+    // padding-left: 16px;
+  }
+
+  .completion-cards {
     display: flex;
     flex-direction: column;
     row-gap: 20px;
-    &-top {
+    width: 80%;
+
+    .category-card {
+      height: auto;
+      padding: 15px;
+      background-color: $list-item-active-background-color;
+      border-radius: 8px;
+      box-shadow: 0px 5px 9px rgba(black, 0.4);
+      color: $secondary-color-tint-500;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 14px;
-      font-weight: 600;
+      flex-direction: column;
+      row-gap: 20px;
+      &-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 600;
+      }
     }
   }
 }

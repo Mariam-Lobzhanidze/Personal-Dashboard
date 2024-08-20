@@ -1,52 +1,38 @@
 <mat-sidenav [opened]="true" mode="side">
+  <div class="filter-by text-icon-aligned-center">
+    <img src="/assets/icons/filter.svg" alt="filter-icon" />
+    <span>Filters</span>
+  </div>
+  <mat-divider></mat-divider>
   <mat-radio-group
     class="completion-radio-group"
     [(ngModel)]="completionState"
     name="completionState"
     aria-label="Select an option">
-    <mat-radio-button color="primary" value="active">Active</mat-radio-button>
-    <mat-radio-button color="primary" value="completed">Completed</mat-radio-button>
+    <mat-radio-button color="accent" value="active">Active</mat-radio-button>
+    <mat-radio-button color="accent" value="completed">Completed</mat-radio-button>
   </mat-radio-group>
-  <mat-nav-list>
-    <a mat-list-item>
-      <span class="entry">
-        <mat-icon>house</mat-icon>
-        <span>Due Today</span>
-      </span>
-    </a>
-    <a mat-list-item>
-      <span class="entry">
-        <mat-icon>house</mat-icon>
-        <span>Due Tomorrow</span>
-      </span>
-    </a>
-    <a mat-list-item>
-      <span class="entry">
-        <mat-icon>house</mat-icon>
-        <span>Upcoming</span>
-      </span>
-    </a>
-    <a mat-list-item>
-      <span class="entry">
-        <mat-icon>house</mat-icon>
-        <span>Overdue</span>
-      </span>
-    </a>
-  </mat-nav-list>
+  <mat-divider></mat-divider>
 
-  <!-- <p> completed not completed with checkboxes</p> -->
+  <div class="checkbox-group">
+    <mat-checkbox
+      color="accent"
+      *ngFor="let dueDateOption of dueDateOptions"
+      [(ngModel)]="dueDateOption.selected"
+      (change)="onDueDateChange()"
+      [value]="dueDateOption.value">
+      {{ dueDateOption.label }}
+    </mat-checkbox>
+  </div>
+  <mat-divider></mat-divider>
+
   <div class="completion-cards">
-    @for(toDoByCategory of toDosByCategory; track toDoByCategory?.categoryName) {
     <div class="category-card">
       <div class="category-card-top primary-colored">
-        <p>{{ toDoByCategory?.categoryName }}</p>
-        <span>{{ toDoByCategory.completionRate }} %</span>
+        <p>{{ activeCategory }}</p>
+        <span>{{ completionRate }} %</span>
       </div>
-      <mat-progress-bar
-        color="accent"
-        mode="determinate"
-        [value]="toDoByCategory?.completionRate"></mat-progress-bar>
+      <mat-progress-bar color="accent" mode="determinate" [value]="completionRate"></mat-progress-bar>
     </div>
-    }
   </div>
 </mat-sidenav>

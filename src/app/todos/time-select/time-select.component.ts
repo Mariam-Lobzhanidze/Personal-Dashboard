@@ -26,7 +26,7 @@ export class TimeSelectComponent {
     label: i.toString().padStart(2, "0"),
   }));
 
-  constructor() {}
+  public constructor() {}
 
   public get selectedTime(): { hours: number; minutes: number; period: "AM" | "PM" } {
     const hours24 =

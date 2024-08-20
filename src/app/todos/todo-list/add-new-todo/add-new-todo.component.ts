@@ -51,7 +51,7 @@ export class AddNewTodoComponent implements OnInit {
 
     this.isEdited = !!this.data;
 
-    if (this.data) {
+    if (this.isEdited) {
       this.form.patchValue(this.data);
     }
 
@@ -76,6 +76,7 @@ export class AddNewTodoComponent implements OnInit {
 
     if (toDoItem.dueDate) {
       // Schedule the reminder
+
       toDoItem?.dueDate?.setHours(
         this.timeSelectComponent?.selectedTime.hours,
         this.timeSelectComponent?.selectedTime.minutes
@@ -86,8 +87,6 @@ export class AddNewTodoComponent implements OnInit {
         `Reminder: ${toDoItem?.description}`,
         "assets/sounds/reminder.wav"
       );
-
-      console.log(toDoItem.dueDate);
     }
 
     if (this.form.valid) {
