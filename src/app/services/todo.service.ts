@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Todo } from "../interfaces/todo.interface";
-import { BehaviorSubject, takeUntil, takeWhile, timer } from "rxjs";
+import { BehaviorSubject, takeUntil, timer } from "rxjs";
 import { Category } from "../interfaces/category.interface";
 import { SharedService } from "./shared.service";
 import { UnsubscribeComponent } from "../shared/unsubscribeComponent";
@@ -38,8 +38,7 @@ export class TodoService extends UnsubscribeComponent {
   public constructor(private sharedService: SharedService) {
     super();
     this.getTodosFromLocalStorage();
-    // this.userCategories = this.userCategoriesFromStorage;
-    // this.updateCategories();
+    this.userCategoriesFromStorage();
   }
 
   public addNewToDoItem(item: Todo): void {
@@ -86,10 +85,13 @@ export class TodoService extends UnsubscribeComponent {
     localStorage.setItem("userCategories", categories);
   }
 
-  private get userCategoriesFromStorage(): any {
-    const categories = JSON.parse(localStorage.getItem("userCategories") as string);
+  private userCategoriesFromStorage(): any {
+    const categoriesFromStorage = localStorage.getItem("userCategories");
 
-    return categories;
+    if (categoriesFromStorage) {
+      this.userCategories = JSON.parse(categoriesFromStorage) as Category[];
+      this.updateCategories();
+    }
   }
 
   public addUserCategory(category: Category): void {
@@ -111,11 +113,13 @@ export class TodoService extends UnsubscribeComponent {
     this.userCategories = this.userCategories.map((category) =>
       category.id === categoryId ? { ...category, ...updatedCategory } : category
     );
+    this.saveCategoriesToLocalStorage();
     this.updateCategories();
   }
 
   public deleteUserCategory(categoryId: string | undefined): void {
     this.userCategories = this.userCategories.filter((category) => category.id !== categoryId);
+    this.saveCategoriesToLocalStorage();
     this.updateCategories();
   }
 

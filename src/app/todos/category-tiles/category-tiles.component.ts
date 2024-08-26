@@ -50,7 +50,7 @@ export class CategoryTilesComponent extends UnsubscribeComponent {
   public ngOnInit(): void {
     this.todoService.categories$.pipe(takeUntil(this.destroy$)).subscribe((categories) => {
       this.categories = categories;
-      console.log(this.categories);
+      // console.log(this.categories);
     });
 
     this.todoService.toDoList$.pipe(takeUntil(this.destroy$)).subscribe((allTodos) => {
