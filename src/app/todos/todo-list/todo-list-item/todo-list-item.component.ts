@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Todo } from "../../../interfaces/todo.interface";
 import { MatIconModule } from "@angular/material/icon";
@@ -19,6 +19,7 @@ import { SharedService } from "../../../services/shared.service";
 })
 export class TodoListItemComponent {
   @Input() listItem?: Todo;
+  @Output() toDoCompletionUpdate = new EventEmitter<void>();
 
   public menuItems: { icon: string; title: string }[] = [
     {
@@ -42,6 +43,8 @@ export class TodoListItemComponent {
 
   public onDetermineCompletionState(toDoItemId: string | undefined, completed: boolean): void {
     this.todoService.updateToDoItem(toDoItemId, { completed: completed });
+    this.toDoCompletionUpdate.emit();
+
     if (completed) {
       this.playConfetti();
     }
@@ -65,7 +68,7 @@ export class TodoListItemComponent {
   }
 
   onMenuItemClicked(action: string) {
-    console.log(this.listItem?.id, action);
+    // console.log(this.listItem?.id, action);
 
     switch (action) {
       case "edit":
@@ -82,6 +85,11 @@ export class TodoListItemComponent {
       description: this.listItem?.description,
       dueDate: this.listItem?.dueDate,
       id: this.listItem?.id,
+      time: {
+        hours: this.listItem?.hours,
+        minutes: this.listItem?.minutes,
+        period: this.listItem?.period,
+      },
     });
   }
 }

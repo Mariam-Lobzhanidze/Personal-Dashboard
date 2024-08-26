@@ -1,34 +1,31 @@
 <mat-sidenav [opened]="true" mode="side">
-  <div class="filter-by text-icon-aligned-center">
-    <img src="/assets/icons/filter.svg" alt="filter-icon" />
-    <span>Filters</span>
-  </div>
-  <mat-divider></mat-divider>
-  <mat-radio-group
-    class="completion-radio-group"
-    [(ngModel)]="completionState"
-    name="completionState"
-    aria-label="Select an option">
-    <mat-radio-button color="accent" value="active">Active</mat-radio-button>
-    <mat-radio-button color="accent" value="completed">Completed</mat-radio-button>
-  </mat-radio-group>
-  <mat-divider></mat-divider>
+  <div class="radios-section">
+    <div class="filter-by text-icon-aligned-center">
+      <img src="/assets/icons/filter.svg" alt="filter-icon" />
+      <span>Filters</span>
+    </div>
 
-  <div class="checkbox-group">
-    <mat-checkbox
-      color="accent"
-      *ngFor="let dueDateOption of dueDateOptions"
-      [(ngModel)]="dueDateOption.selected"
-      (change)="onDueDateChange()"
-      [value]="dueDateOption.value">
-      {{ dueDateOption.label }}
-    </mat-checkbox>
+    <mat-radio-group
+      class="completion-radio-group"
+      [(ngModel)]="completionState"
+      (change)="onTodoItemStateChange($event.value)"
+      name="completionState"
+      aria-label="Select an option">
+      <mat-radio-button color="accent" value="all">All</mat-radio-button>
+      <mat-radio-button color="accent" value="active">Active</mat-radio-button>
+      <mat-radio-button color="accent" value="completed">Completed</mat-radio-button>
+    </mat-radio-group>
   </div>
+
   <mat-divider></mat-divider>
 
   <div class="completion-cards">
-    <div class="category-card">
-      <div class="category-card-top primary-colored">
+    <p class="completion-cards-title text-icon-aligned-center"
+      ><img src="/assets/icons/flag.svg" alt="flag-icon" />Completion Rate
+    </p>
+
+    <div class="completion-card">
+      <div class="completion-card-top">
         <p>{{ activeCategory }}</p>
         <span>{{ completionRate }} %</span>
       </div>

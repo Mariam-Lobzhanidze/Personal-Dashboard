@@ -1,7 +1,12 @@
 import { ComponentType } from "@angular/cdk/portal";
 import { Injectable } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { MatSnackBar, MatSnackBarVerticalPosition } from "@angular/material/snack-bar";
+import {
+  MatSnackBar,
+  MatSnackBarRef,
+  MatSnackBarVerticalPosition,
+  SimpleSnackBar,
+} from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: "root",
@@ -13,8 +18,8 @@ export class SharedService {
     message: string,
     duration: number,
     verticalPosition: MatSnackBarVerticalPosition | undefined
-  ): void {
-    this.snackBar.open(message, "Close", {
+  ): MatSnackBarRef<SimpleSnackBar> {
+    return this.snackBar.open(message, "Close", {
       duration,
       verticalPosition,
     });
@@ -22,7 +27,7 @@ export class SharedService {
 
   public openDialog<T>(component: ComponentType<T>, data?: unknown): MatDialogRef<T> {
     return this.dialog.open(component, {
-      width: "300px",
+      width: "360px",
       panelClass: "my-dialog",
       data: data,
     });

@@ -3,6 +3,7 @@ import { Component } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
+import { convert12HourTo24Hour } from "../../shared/utils";
 
 @Component({
   selector: "app-time-select",
@@ -29,12 +30,7 @@ export class TimeSelectComponent {
   public constructor() {}
 
   public get selectedTime(): { hours: number; minutes: number; period: "AM" | "PM" } {
-    const hours24 =
-      this.period === "PM" && this.selectedHour !== 12
-        ? this.selectedHour + 12
-        : this.period === "AM" && this.selectedHour === 12
-        ? 0
-        : this.selectedHour;
+    const hours24 = convert12HourTo24Hour(this.selectedHour, this.period);
 
     return {
       hours: hours24,

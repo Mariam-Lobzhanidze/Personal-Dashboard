@@ -1,6 +1,6 @@
 <div class="todo-list">
   <div class="todo-list-side-nav">
-    <app-side-nav></app-side-nav>
+    <app-side-nav (todoItemStateChange)="filterTodosByCompletionState($event)"></app-side-nav>
   </div>
   <div class="todo-list-content">
     <div class="todo-list-content-controls">
@@ -41,8 +41,14 @@
       </div>
     </div>
     <div class="list-items">
-      @for(todo of todos; track todo.id) {
-      <app-todo-list-item [listItem]="todo"></app-todo-list-item>
+      @if(!filteredTodos?.length) {
+      <div class="empty">
+        <p class="text-icon-aligned-center"
+          >No items <img src="/assets/icons/empty.svg" alt="empty-icon" />
+        </p>
+      </div>
+      } @for(todo of filteredTodos; track todo.id) {
+      <app-todo-list-item (toDoCompletionUpdate)="removeFilters()" [listItem]="todo"></app-todo-list-item>
       }
     </div>
   </div>

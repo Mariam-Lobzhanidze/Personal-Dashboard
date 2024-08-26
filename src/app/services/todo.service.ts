@@ -1,13 +1,15 @@
 import { Injectable } from "@angular/core";
 import { Todo } from "../interfaces/todo.interface";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, takeUntil, takeWhile, timer } from "rxjs";
 import { Category } from "../interfaces/category.interface";
 import { SharedService } from "./shared.service";
+import { UnsubscribeComponent } from "../shared/unsubscribeComponent";
 
 @Injectable({
   providedIn: "root",
 })
-export class TodoService {
+export class TodoService extends UnsubscribeComponent {
+  private audio?: HTMLAudioElement;
   //categories
   private defaultCategories: Category[] = [
     { id: "1", title: "all", icon: "all.svg", activeTodosCount: 0, type: "default" },
@@ -33,7 +35,12 @@ export class TodoService {
   private toDoListSubject = new BehaviorSubject<Todo[]>(this.todos);
   public toDoList$ = this.toDoListSubject.asObservable();
 
-  public constructor(private sharedService: SharedService) {}
+  public constructor(private sharedService: SharedService) {
+    super();
+    this.getTodosFromLocalStorage();
+    // this.userCategories = this.userCategoriesFromStorage;
+    // this.updateCategories();
+  }
 
   public addNewToDoItem(item: Todo): void {
     this.todos = [item, ...this.todos];
@@ -52,9 +59,39 @@ export class TodoService {
 
   private updateToDos(): void {
     this.toDoListSubject.next([...this.todos]);
+    this.saveTodosToLocalStorage();
+  }
+
+  private saveTodosToLocalStorage(): void {
+    const todos = JSON.stringify(this.todos);
+    localStorage.setItem("todos", todos);
+  }
+
+  private getTodosFromLocalStorage(): void {
+    const todos = localStorage.getItem("todos");
+    if (todos) {
+      this.todos = JSON.parse(todos).map((todo: Todo) => ({
+        ...todo,
+        dueDate: todo.dueDate ? new Date(todo.dueDate) : null,
+        createdAt: todo.createdAt ? new Date(todo.createdAt) : null,
+      }));
+
+      this.updateToDos();
+    }
   }
 
   //categories methods
+  private saveCategoriesToLocalStorage(): void {
+    const categories = JSON.stringify(this.userCategories);
+    localStorage.setItem("userCategories", categories);
+  }
+
+  private get userCategoriesFromStorage(): any {
+    const categories = JSON.parse(localStorage.getItem("userCategories") as string);
+
+    return categories;
+  }
+
   public addUserCategory(category: Category): void {
     if (
       [...this.userCategories, ...this.defaultCategories].some(
@@ -66,6 +103,7 @@ export class TodoService {
     }
 
     this.userCategories = [category, ...this.userCategories];
+    this.saveCategoriesToLocalStorage();
     this.updateCategories();
   }
 
@@ -85,29 +123,36 @@ export class TodoService {
     this.categoriesSubject.next([...this.userCategories, ...this.defaultCategories]);
   }
 
-  //reminders for to do list items
+  //reminder for to do list items
 
-  public scheduleReminder(dueDate: Date, message: string, musicUrl: string) {
-    const currentTime = new Date().getTime();
+  public scheduleReminder(dueDate: Date, createdAt: Date, message: string, musicUrl: string): void {
     const reminderTime = dueDate.getTime();
+
+    const currentTime = createdAt.getTime();
+
     const timeDifference = reminderTime - currentTime;
 
     if (timeDifference > 0) {
-      setTimeout(() => {
-        this.triggerReminder(message, musicUrl);
-      }, timeDifference);
+      timer(timeDifference)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => {
+          this.triggerReminder(message, musicUrl);
+        });
     } else {
-      this.sharedService.showSnackbar(
-        "Choose a future time. The selected time has already passed!",
-        5000,
-        "top"
-      );
+      this.sharedService.showSnackbar("Reminder time is in the past.", 5000, "top");
     }
   }
 
-  private triggerReminder(message: string, musicUrl: string) {
-    this.sharedService.showSnackbar(message, 5000, "top");
-    const audio = new Audio(musicUrl);
-    audio.play();
+  private triggerReminder(message: string, musicUrl: string): void {
+    let snackBarRef = this.sharedService.showSnackbar(message, 35000, "top");
+    snackBarRef.onAction().subscribe(() => {
+      this.audio?.pause();
+      if (this.audio) {
+        this.audio.currentTime = 0;
+      }
+    });
+
+    this.audio = new Audio(musicUrl);
+    this.audio.play();
   }
 }

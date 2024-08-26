@@ -45,32 +45,6 @@ $custom-primary-palette: (
   ),
 );
 
-// $custom-secondary-palette: (
-//   50: #f0f8e8,
-//   100: #e0f2d1,
-//   200: #d1ebba,
-//   300: #c1e5a3,
-//   400: #b2de8c,
-//   500: #a3d775,
-//   600: #93d15e,
-//   700: #84ca47,
-//   800: #74c430,
-//   900: #65bd19,
-// );
-
-// $custom-primary-palette: (
-//   50: #fff8ee,
-//   100: #fff1de,
-//   200: #ffe9cd,
-//   300: #ffe2bd,
-//   400: #ffdbac,
-//   500: #ffd49b,
-//   600: #ffcd8b,
-//   700: #ffc57a,
-//   800: #ffbe6a,
-//   900: #ffb759,
-// );
-
 $personal_dashboard-primary: mat.define-palette($custom-primary-palette);
 $personal_dashboard-accent: mat.define-palette($custom-secondary-palette);
 
@@ -161,7 +135,7 @@ mat-sidenav {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    row-gap: 30px;
+    row-gap: 50px;
     align-items: center;
 
     .mat-mdc-nav-list {
@@ -200,19 +174,30 @@ mat-sidenav {
     padding: 12px;
   }
 }
+
 .completion-radio-group {
   align-self: flex-start;
   display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.completion-radio-group-on-mobile {
+  align-self: flex-start;
+  display: flex;
+  // flex-direction: column;
   column-gap: 15px;
+  margin-top: 30px;
 }
 
-.mat-mdc-checkbox .mdc-label {
-  color: $secondary-color-tint-400 !important;
-}
+// .mat-mdc-checkbox .mdc-label {
+//   color: $secondary-color-tint-700;
+//   font-family: Verdana, Geneva, Tahoma, sans-serif;
+// }
 
-.mdc-checkbox__background {
-  border-color: $secondary-color !important;
-}
+// .mdc-checkbox__background {
+//   border-color: $secondary-color !important;
+// }
 
 mat-divider {
   width: 100%;

@@ -6,4 +6,7 @@ export interface Todo {
   categoryName: string;
   createdAt: Date;
   dueDate: Date;
+  hours: number;
+  minutes: number;
+  period: "AM" | "PM";
 }

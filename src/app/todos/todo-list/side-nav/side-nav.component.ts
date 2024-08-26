@@ -1,7 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { MatSidenavModule } from "@angular/material/sidenav";
-import { MatListModule } from "@angular/material/list";
-import { MatIconModule } from "@angular/material/icon";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { TodoService } from "../../../services/todo.service";
 import { UnsubscribeComponent } from "../../../shared/unsubscribeComponent";
@@ -29,14 +27,9 @@ import { MatDividerModule } from "@angular/material/divider";
   styleUrl: "./side-nav.component.scss",
 })
 export class SideNavComponent extends UnsubscribeComponent implements OnInit {
-  public dueDateOptions = [
-    { label: "Due Today", value: "today", selected: false },
-    { label: "Due Tomorrow", value: "tomorrow", selected: false },
-    { label: "Upcoming", value: "upcoming", selected: false },
-    { label: "Overdue", value: "overdue", selected: false },
-  ];
+  @Output() public todoItemStateChange = new EventEmitter<string>();
 
-  public completionState: "active" | "completed" = "active";
+  @Input() public completionState: "active" | "completed" | "all" = "all";
 
   public completionRate?: number;
   public activeCategory?: string | null;
@@ -53,12 +46,13 @@ export class SideNavComponent extends UnsubscribeComponent implements OnInit {
     this.route.queryParamMap.subscribe((params) => {
       this.activeCategory = params.get("category");
 
-      const selectedDueDates = params.getAll("dueDate");
-      this.dueDateOptions.forEach((option) => {
-        option.selected = selectedDueDates.includes(option.value);
-      });
       this.calculateCompletionRate();
     });
+  }
+
+  public onTodoItemStateChange(value: "active" | "completed" | "all") {
+    this.completionState = value;
+    this.todoItemStateChange.emit(this.completionState);
   }
 
   private calculateCompletionRate(): void {
@@ -75,18 +69,6 @@ export class SideNavComponent extends UnsubscribeComponent implements OnInit {
             ? Math.round((todos.filter((todo) => todo.completed).length / todos.length) * 100)
             : 0;
       }
-    });
-  }
-
-  public onDueDateChange(): void {
-    const selectedDueDates = this.dueDateOptions
-      .filter((option) => option.selected)
-      .map((option) => option.value);
-
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { dueDate: selectedDueDates },
-      queryParamsHandling: "merge",
     });
   }
 }

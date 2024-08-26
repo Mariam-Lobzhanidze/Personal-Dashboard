@@ -1,5 +1,4 @@
 @import "variables";
-
 .todo-list {
   display: flex;
   column-gap: 10px;
@@ -34,6 +33,12 @@
       display: flex;
       flex-direction: column;
       row-gap: 25px;
+
+      .radio-group {
+        @media (min-width: 601px) {
+          display: none;
+        }
+      }
 
       .btns {
         display: flex;
@@ -101,6 +106,17 @@
       height: 100%;
       overflow-y: auto;
       flex: 1;
+      position: relative;
+
+      .empty {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        p {
+          color: $primary-color;
+        }
+      }
     }
 
     @media (max-width: 768px) {

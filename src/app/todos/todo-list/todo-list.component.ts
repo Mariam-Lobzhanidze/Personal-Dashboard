@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TodoListItemComponent } from "./todo-list-item/todo-list-item.component";
 import { TodoService } from "../../services/todo.service";
@@ -28,6 +28,8 @@ import { SharedService } from "../../services/shared.service";
   styleUrl: "./todo-list.component.scss",
 })
 export class TodoListComponent extends UnsubscribeComponent implements OnInit, AfterViewInit {
+  @ViewChild(SideNavComponent) sideNavComponent?: SideNavComponent;
+
   private selectedChipEl?: HTMLElement;
   public completionRateByCategory?: number;
 
@@ -35,6 +37,8 @@ export class TodoListComponent extends UnsubscribeComponent implements OnInit, A
   public categories$?: Observable<Category[]>;
 
   public todos?: Todo[];
+
+  public filteredTodos?: Todo[];
 
   public constructor(
     private route: ActivatedRoute,
@@ -66,6 +70,8 @@ export class TodoListComponent extends UnsubscribeComponent implements OnInit, A
       )
       .subscribe((toDos) => {
         this.todos = toDos;
+        this.filteredTodos = toDos;
+        // console.log(this.todos);
 
         const totalItems = this.todos.length;
         const completedItems = this.todos.filter((todo) => todo.completed).length;
@@ -94,5 +100,18 @@ export class TodoListComponent extends UnsubscribeComponent implements OnInit, A
 
   public onBackToCategories(): void {
     this.router.navigate(["todos"]);
+  }
+
+  public removeFilters(): void {
+    this.filteredTodos = this.todos;
+    if (this.sideNavComponent) {
+      this.sideNavComponent.completionState = "all";
+    }
+  }
+
+  public filterTodosByCompletionState(value: string) {
+    this.filteredTodos = this.todos?.filter((todo) =>
+      value === "active" ? !todo.completed : value === "completed" ? todo.completed : true
+    );
   }
 }
