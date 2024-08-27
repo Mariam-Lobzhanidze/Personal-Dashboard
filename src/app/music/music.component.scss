@@ -1,0 +1,19 @@
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.video-item {
+  cursor: pointer;
+}
+
+.video-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.video-player {
+  margin-top: 20px;
+}
