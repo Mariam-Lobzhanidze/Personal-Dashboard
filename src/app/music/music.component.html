@@ -1,15 +1,21 @@
-<div id="player">
-  <iframe
-    width="560"
-    height="315"
-    [src]="sanitize(selectedVideoUrl)"
-    frameborder="0"
-    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
-</div>
+<div class="music-wrapper">
+  <div class="music-player" id="player">
+    <iframe
+      width="560"
+      height="315"
+      [src]="sanitize(selectedVideoUrl)"
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+  </div>
 
-<div *ngFor="let video of popularMusicVideos">
-  <h3>{{ video.snippet.title }}</h3>
-  <button (click)="playVideo(video.id)">Play</button>
+  <div class="video-cards-wrapper">
+    <div class="video-card-wrapper" *ngFor="let video of musicVideos">
+      <div class="video-card">
+        <img [src]="video.thumbnail" alt="{{ video.title }}" />
+      </div>
+      <button (click)="playVideo(video.videoId)">Play</button>
+      <h3>{{ video.title }}</h3>
+    </div>
+  </div>
 </div>

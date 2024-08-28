@@ -15,4 +15,9 @@ export class MusicService {
     const url = `${this.baseUrl}?part=snippet&chart=mostPopular&regionCode=${regionCode}&videoCategoryId=${videoCategoryId}&key=${this.apiKey}`;
     return this.http.get(url);
   }
+
+  public searchVideos(query: string, maxResults: number = 25): Observable<any> {
+    const url = `${this.searchUrl}?part=snippet&q=${query}&maxResults=${maxResults}&key=${this.apiKey}`;
+    return this.http.get(url);
+  }
 }

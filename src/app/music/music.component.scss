@@ -1,19 +1,57 @@
-.video-list {
+@import "variables";
+
+.music-wrapper {
+  max-width: 1200px;
+  padding: 15px;
+  margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
+  flex-direction: column;
+  row-gap: 25px;
+  .video-cards-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    border-radius: 12px;
 
-.video-item {
-  cursor: pointer;
-}
+    .video-card-wrapper {
+      cursor: pointer;
+      background-color: $music-card-background-color;
+      width: 230px;
+      height: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 12px;
+      padding: 15px;
 
-.video-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
+      .video-card {
+        width: 200px;
+        height: 200px;
+        border-radius: 12px;
 
-.video-player {
-  margin-top: 20px;
+        overflow: hidden;
+
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      button {
+        margin-top: 10px;
+      }
+
+      h3 {
+        font-size: 14px;
+        color: #fff;
+        text-align: center;
+      }
+    }
+  }
+
+  .music-player {
+    width: 100%;
+    padding-top: 25px;
+  }
 }
