@@ -24,8 +24,8 @@ export const routes: Routes = [
   },
 
   {
-    path: "notes",
-    loadComponent: () => import("./notes/notes.component").then((mod) => mod.NotesComponent),
+    path: "music",
+    loadComponent: () => import("./music/music.component").then((mod) => mod.MusicComponent),
   },
   {
     path: "**",
