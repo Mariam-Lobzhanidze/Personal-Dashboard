@@ -1,7 +1,12 @@
 <div class="music-wrapper">
   <div class="music-player" id="player">
     <div class="search-container">
-      <input name="query" [(ngModel)]="searchQuery" type="text" placeholder="What do you want to play?" />
+      <input
+        name="query"
+        (ngModelChange)="onQueryChange($event)"
+        [(ngModel)]="searchQuery"
+        type="text"
+        placeholder="What do you want to play?" />
       <img (click)="onSearchMusic()" class="search-icon" src="/assets/icons/search.svg" alt="search-icon" />
     </div>
     <div class="player">
@@ -25,7 +30,16 @@
           alt="play-icon"
           (click)="playVideo(video.videoId)" />
       </div>
-      <h3>{{ video.title | truncate : 20 }}</h3>
+      <div class="video-card-text">
+        <h3>{{ video.title | truncate : 20 }}</h3>
+        <!-- <p>{{ video.singer | truncate : 12 }}</p> -->
+      </div>
+
+      <img
+        class="play-icon-mobile"
+        src="/assets/icons/play-2.svg"
+        alt="play-icon"
+        (click)="playVideo(video.videoId)" />
     </div>
   </div>
 </div>

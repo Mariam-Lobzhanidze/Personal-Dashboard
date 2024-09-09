@@ -26,44 +26,28 @@ export class MusicComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      const query = params["query"];
-      if (query) {
-        this.searchQuery = query;
-        this.searchVideos();
-      }
-    });
-    // this.searchVideos(this.searchQuery as string);
+    if (this.searchQuery) {
+      this.onSearchMusic();
+    }
+
+    // console.log("reloaded");
+  }
+
+  public onQueryChange(value: string): void {
+    console.log("Input changed:", value);
   }
 
   public onSearchMusic(): void {
-    if (this.searchQuery) {
-      this.router.navigate([], {
-        queryParams: { query: this.searchQuery },
-        queryParamsHandling: "merge",
-      });
-
-      this.searchVideos();
-    }
-  }
-
-  public sanitize(url: string): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-  }
-
-  public playVideo(videoId: string): void {
-    this.selectedVideoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-  }
-
-  public searchVideos(): void {
     this.musicService.searchVideos(this.searchQuery).subscribe(
       (response) => {
         this.musicVideos = response.items.map((item: any) => {
           return {
             videoId: item.id.videoId,
             title: item.snippet.title,
+            // singer: item.snippet.title.split("-")[0]?.trim(),
             thumbnail: item.snippet.thumbnails.medium.url,
             channelId: item.snippet.channelId,
+            channelTitle: item.snippet.channelTitle,
           };
         });
         console.log(this.musicVideos);
@@ -72,5 +56,20 @@ export class MusicComponent implements OnInit {
         console.error("Error fetching videos", error);
       }
     );
+  }
+
+  public sanitize(url: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  public playVideo(videoId: string): void {
+    if (this.searchQuery) {
+      this.router.navigate([], {
+        queryParams: { query: this.searchQuery },
+        queryParamsHandling: "merge",
+      });
+    }
+
+    this.selectedVideoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
   }
 }
