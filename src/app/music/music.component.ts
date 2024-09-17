@@ -1,15 +1,19 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, TemplateRef } from "@angular/core";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { MusicService } from "./music.Service";
 import { TruncatePipe } from "../pipes/truncate.pipe";
-import { FormsModule } from "@angular/forms";
+
 import { ActivatedRoute, Router } from "@angular/router";
+import { MatListModule } from "@angular/material/list";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { FormsModule } from "@angular/forms";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: "app-music",
   standalone: true,
-  imports: [CommonModule, TruncatePipe, FormsModule],
+  imports: [CommonModule, TruncatePipe, MatListModule, FormsModule, MatCheckboxModule],
   templateUrl: "./music.component.html",
   styleUrls: ["./music.component.scss"],
 })
@@ -17,12 +21,14 @@ export class MusicComponent implements OnInit {
   public searchQuery: string = "madonna";
   public musicVideos: any[] = [];
   public selectedVideoUrl: string = "";
+  public playlistNames: string[] = ["Favorite music"];
 
   constructor(
     private musicService: MusicService,
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   public ngOnInit(): void {
@@ -72,4 +78,13 @@ export class MusicComponent implements OnInit {
 
     this.selectedVideoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
   }
+
+  public onOpenPlaylistDialog(templateRef: TemplateRef<any>): void {
+    const dialogRef = this.dialog.open(templateRef, {
+      width: "300px",
+      panelClass: "my-dialog",
+    });
+  }
+
+  public onCreateNewPlaylist(): void {}
 }

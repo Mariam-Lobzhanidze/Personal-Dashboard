@@ -5,160 +5,193 @@
   padding: 15px;
   margin: 0 auto;
   display: flex;
-  column-gap: 25px;
-
-  @media (max-width: 1050px) and (min-height: 601px) {
-    width: 100%;
-    flex-direction: column;
-    row-gap: 15px;
-  }
+  gap: 25px;
 
   .video-cards-wrapper {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     flex: 1;
     gap: 15px;
-    max-height: 486px;
+    max-height: 490px;
     overflow-y: auto;
     padding: 8px;
 
-    @media (max-width: 1050px) and (min-height: 601px) {
-      max-height: 630px;
-      grid-template-columns: repeat(3, 1fr);
+    @media (max-width: 1030px) {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      max-height: 458px;
     }
 
-    @media (max-width: 840px) {
-      max-height: 440px;
+    @media (width: 1024px) and (height: 600px) {
+      max-height: 420px;
     }
 
     @media (max-width: 600px) {
-      max-height: 380px;
       grid-template-columns: 1fr;
+      max-height: 380px;
+    }
+
+    @media (width: 540px) and (height: 720px) {
+      max-height: 250px;
+    }
+
+    @media (max-width: 400px) {
+      max-height: 250px;
     }
   }
 
-  .video-card-wrapper {
-    box-shadow: 0px 2px 4px rgba(black, 0.1);
-    cursor: pointer;
-    background-color: $music-card-background-color;
-    width: 100%;
-    height: 100%;
-    display: flex;
+  @media (min-height: 1366px) {
     flex-direction: column;
-    row-gap: 12px;
-    align-items: center;
-    border-radius: 12px;
-    padding: 15px;
-    position: relative;
+  }
 
-    @media (max-width: 600px) {
-      flex-direction: row;
-      column-gap: 10px;
-    }
+  @media (max-width: 1000px) {
+    flex-direction: column;
+  }
 
-    .play-icon-mobile {
-      display: none;
-    }
-
-    @media (max-width: 600px) {
-      .play-icon-mobile {
-        display: block;
-        position: absolute;
-        right: 10px;
-        bottom: 10px;
-        width: 30px;
-        height: 30px;
-      }
-    }
-
-    .image-wrapper {
-      width: 100%;
-      height: 150px;
-      border-radius: 12px;
-      overflow: hidden;
-      position: relative;
-
-      @media (max-width: 600px) {
-        height: 80px;
-        width: 100px;
-      }
-
-      .play-icon {
-        display: none;
-        transition: all 0.3s ease-in;
-        position: absolute;
-        bottom: 12px;
-        right: 12px;
-      }
-
-      .thumbnail {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    button {
-      margin-top: 10px;
-    }
-
-    .video-card-text {
-      align-self: flex-start;
-
-      h3 {
-        font-size: 14px;
-        color: #fff;
-        text-align: center;
-        margin-bottom: 6px;
-      }
-
-      // p {
-      //   font-size: 14px;
-      //   color: $primary-color;
-
-      //   @media (max-width: 600px) {
-      //     font-size: 12px;
-      //   }
-      // }
-    }
-
-    @media (min-width: 601px) {
-      &:hover .image-wrapper .play-icon {
-        display: block;
-      }
-    }
+  @media (max-width: 540px) {
+    flex-direction: column;
   }
 }
 
-.music-player {
+.video-card-wrapper {
+  box-shadow: 0px 2px 4px rgba(black, 0.1);
+  cursor: pointer;
+  background-color: $music-card-background-color;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  row-gap: 16px;
-  max-height: 446px;
-  width: 545px;
+  row-gap: 12px;
+  align-items: center;
+  border-radius: 12px;
+  padding: 15px;
+  position: relative;
 
-  @media (max-width: 1050px) and (min-height: 601px) {
-    height: 500px;
-    width: 100%;
+  @media (max-width: 600px) {
+    flex-direction: row;
+    column-gap: 10px;
   }
 
-  @media (max-width: 840px) {
-    height: 400px;
+  .bookmark-icon-mobile {
+    @media (min-width: 601px) {
+      display: none;
+    }
+  }
+
+  .play-icon-mobile {
+    display: none;
   }
 
   @media (max-width: 600px) {
-    max-height: 280px;
+    .play-icon-mobile {
+      display: block;
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .image-wrapper {
+    width: 100%;
+    height: 150px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+
+    .bookmark-icon {
+      @media (max-width: 600px) {
+        display: none;
+      }
+      display: block;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 99999;
+      background-color: $music-card-background-color;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      box-shadow: 0px 2px 4px rgba(black, 0.1);
+    }
+
+    @media (max-width: 1030px) {
+      height: 130px;
+    }
+
+    @media (max-width: 600px) {
+      height: 80px;
+      width: 100px;
+    }
+
+    .play-icon {
+      display: none;
+      transition: all 0.3s ease-in;
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+    }
+
+    .thumbnail {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  button {
+    margin-top: 10px;
+  }
+
+  .video-card-text {
+    align-self: center;
+
+    @media (max-width: 600px) {
+      align-self: flex-start;
+    }
+
+    h3 {
+      font-size: 14px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 6px;
+      @media (max-width: 400px) {
+        font-size: 12px;
+      }
+    }
+  }
+
+  @media (min-width: 601px) {
+    &:hover .image-wrapper .play-icon {
+      display: block;
+    }
+  }
+}
+.music-player {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+
+  min-height: 400px;
+
+  @media (max-width: 600px) {
+    min-height: 240px;
   }
 
   .player {
-    flex: 1;
     border-radius: 12px;
+
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 
     iframe {
       border-radius: 12px;
       width: 100%;
       height: 100%;
       border: none;
+      flex: 1;
     }
   }
 
