@@ -3,17 +3,17 @@ import { Component, OnInit, TemplateRef } from "@angular/core";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { MusicService } from "./music.Service";
 import { TruncatePipe } from "../pipes/truncate.pipe";
-
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatListModule } from "@angular/material/list";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { FormsModule } from "@angular/forms";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: "app-music",
   standalone: true,
   imports: [CommonModule, TruncatePipe, MatListModule, FormsModule, MatCheckboxModule],
+
   templateUrl: "./music.component.html",
   styleUrls: ["./music.component.scss"],
 })

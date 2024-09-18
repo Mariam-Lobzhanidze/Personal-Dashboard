@@ -20,6 +20,7 @@
 
   <div class="video-cards-wrapper">
     <div class="video-card-wrapper" *ngFor="let video of musicVideos">
+      <<<<<<< HEAD
       <img
         class="bookmark-icon-mobile"
         (click)="onOpenPlaylistDialog(playlistDialog)"
@@ -31,39 +32,46 @@
           (click)="onOpenPlaylistDialog(playlistDialog)"
           src="/assets/icons/bookmark.svg"
           alt="bookmark-icon" />
-        <img class="thumbnail" [src]="video.thumbnail" alt="{{ video.title }}" />
+        =======
+        <div class="image-wrapper">
+          >>>>>>> dc08fb04a22d5c964c7e42a8a7f8fdf1d843bf4c
+          <img class="thumbnail" [src]="video.thumbnail" alt="{{ video.title }}" />
+          <img
+            class="play-icon"
+            src="/assets/icons/play-2.svg"
+            alt="play-icon"
+            (click)="playVideo(video.videoId)" />
+        </div>
+        <div class="video-card-text">
+          <h3>{{ video.title | truncate : 20 }}</h3>
+          <<<<<<< HEAD =======
+          <!-- <p>{{ video.singer | truncate : 12 }}</p> -->
+          >>>>>>> dc08fb04a22d5c964c7e42a8a7f8fdf1d843bf4c
+        </div>
+
         <img
-          class="play-icon"
+          class="play-icon-mobile"
           src="/assets/icons/play-2.svg"
           alt="play-icon"
           (click)="playVideo(video.videoId)" />
       </div>
-      <div class="video-card-text">
-        <h3>{{ video.title | truncate : 20 }}</h3>
-      </div>
-
-      <img
-        class="play-icon-mobile"
-        src="/assets/icons/play-2.svg"
-        alt="play-icon"
-        (click)="playVideo(video.videoId)" />
     </div>
   </div>
+
+  <ng-template #playlistDialog>
+    <h2 mat-dialog-title>Save video to</h2>
+
+    <div mat-dialog-content>
+      <p>Select a playlist:</p>
+      <mat-selection-list #playlists>
+        <mat-list-option *ngFor="let playlist of playlistNames" [value]="playlist">
+          <mat-checkbox>{{ playlist }}</mat-checkbox>
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+
+    <div mat-dialog-actions align="end">
+      <span class="create-new-playlist" (click)="onCreateNewPlaylist()">+ Create new playlist</span>
+    </div>
+  </ng-template>
 </div>
-
-<ng-template #playlistDialog>
-  <h2 mat-dialog-title>Save video to</h2>
-
-  <div mat-dialog-content>
-    <p>Select a playlist:</p>
-    <mat-selection-list #playlists>
-      <mat-list-option *ngFor="let playlist of playlistNames" [value]="playlist">
-        <mat-checkbox>{{ playlist }}</mat-checkbox>
-      </mat-list-option>
-    </mat-selection-list>
-  </div>
-
-  <div mat-dialog-actions align="end">
-    <span class="create-new-playlist" (click)="onCreateNewPlaylist()">+ Create new playlist</span>
-  </div>
-</ng-template>
