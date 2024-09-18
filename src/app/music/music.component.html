@@ -1,0 +1,69 @@
+<div class="music-wrapper">
+  <div class="music-player" id="player">
+    <div class="search-container">
+      <input
+        name="query"
+        (ngModelChange)="onQueryChange($event)"
+        [(ngModel)]="searchQuery"
+        type="text"
+        placeholder="What do you want to play?" />
+      <img (click)="onSearchMusic()" class="search-icon" src="/assets/icons/search.svg" alt="search-icon" />
+    </div>
+    <div class="player">
+      <iframe
+        [src]="sanitize(selectedVideoUrl)"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="video-cards-wrapper">
+    <div class="video-card-wrapper" *ngFor="let video of musicVideos">
+      <img
+        class="bookmark-icon-mobile"
+        (click)="onOpenPlaylistDialog(playlistDialog)"
+        src="/assets/icons/bookmark.svg"
+        alt="bookmark-icon" />
+      <div class="image-wrapper">
+        <img
+          class="bookmark-icon"
+          (click)="onOpenPlaylistDialog(playlistDialog)"
+          src="/assets/icons/bookmark.svg"
+          alt="bookmark-icon" />
+        <img class="thumbnail" [src]="video.thumbnail" alt="{{ video.title }}" />
+        <img
+          class="play-icon"
+          src="/assets/icons/play-2.svg"
+          alt="play-icon"
+          (click)="playVideo(video.videoId)" />
+      </div>
+      <div class="video-card-text">
+        <h3>{{ video.title | truncate : 20 }}</h3>
+      </div>
+
+      <img
+        class="play-icon-mobile"
+        src="/assets/icons/play-2.svg"
+        alt="play-icon"
+        (click)="playVideo(video.videoId)" />
+    </div>
+  </div>
+</div>
+
+<ng-template #playlistDialog>
+  <h2 mat-dialog-title>Save video to</h2>
+
+  <div mat-dialog-content>
+    <p>Select a playlist:</p>
+    <mat-selection-list #playlists>
+      <mat-list-option *ngFor="let playlist of playlistNames" [value]="playlist">
+        <mat-checkbox>{{ playlist }}</mat-checkbox>
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+
+  <div mat-dialog-actions align="end">
+    <span class="create-new-playlist" (click)="onCreateNewPlaylist()">+ Create new playlist</span>
+  </div>
+</ng-template>
