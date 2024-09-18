@@ -9,7 +9,6 @@ import { MatListModule } from "@angular/material/list";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { FormsModule } from "@angular/forms";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-
 @Component({
   selector: "app-music",
   standalone: true,
